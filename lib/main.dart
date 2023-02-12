@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
+import 'package:ruralclap_app/pages/service_request_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage();
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -43,11 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const CreateJobPage()),
+                    MaterialPageRoute(builder: (context) => const CreateJobPage()),
                   );
                 },
                 child: const Text('Create Job page')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ServiceRequest()),
+                  );
+                },
+                child: const Text('Job Request')),
           ],
         ),
       ),

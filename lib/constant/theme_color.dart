@@ -7,4 +7,5 @@ class ColorConstant {
   static const Color textPrimary = Color(0xFF292929);
   static const Color textBody = Color(0xFF6E8387);
   static const Color error = Color(0xffEF233C);
+  static const Color borderGrey = Color(0xFFE0E4E6);
 }

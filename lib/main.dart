@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
 import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
 import 'package:ruralclap_app/pages/service_request_page.dart';
@@ -66,7 +67,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => const SPProfilePage()),
                   );
                 },
-                child: const Text('Service Provider page'))
+                child: const Text('Service Provider page')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AppliedJobs()),
+                  );
+                },
+                child: const Text('Applied Jobs page'))
           ],
         ),
       ),

@@ -277,7 +277,7 @@ class _SPProfilePage extends State<SPProfilePage> {
                                 borderRadius: BorderRadius.circular(15)),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 18.0, vertical: 8),
+                                  horizontal: 18.0, vertical: 15),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -288,7 +288,7 @@ class _SPProfilePage extends State<SPProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Contact Details',
+                                        'Basic Details',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontSize: 18,

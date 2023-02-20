@@ -91,24 +91,60 @@ class AppliedJobCard extends StatelessWidget {
               height: 20,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(),
-                    onPressed: null,
-                    icon: FaIcon(
-                      FontAwesomeIcons.calendar,
-                      size: 18,
-                    )),
-                Text(
-                  'Applied on 14th May',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 1.02,
-                    color: ColorConstant.textPrimaryBlack,
-                  ),
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: const [
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(),
+                            onPressed: null,
+                            icon: FaIcon(
+                              FontAwesomeIcons.calendar,
+                              size: 18,
+                            )),
+                        Text(
+                          'Applied on 14th May',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 1.02,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: const [
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(),
+                            onPressed: null,
+                            icon: FaIcon(
+                              FontAwesomeIcons.userGroup,
+                              size: 16,
+                            )),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          '448 Applicants',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 1.5,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 )
               ],
             )

@@ -9,4 +9,5 @@ class ColorConstant {
   static const Color textPrimaryWhite = Color.fromARGB(255, 255, 255, 255);
   static const Color textBody = Color(0xFF6E8387);
   static const Color error = Color(0xffEF233C);
+  static const Color borderGrey = Color(0xFFE0E4E6);
 }

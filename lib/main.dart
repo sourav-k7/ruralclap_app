@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
+import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 import 'package:ruralclap_app/pages/service_request_page.dart';
+import 'package:ruralclap_app/pages/job_listing_page.dart';
+import 'package:ruralclap_app/pages/job_application_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                        
                       builder: (context) => const CreateJobPage()),
                 );
               },
@@ -55,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                        
                       builder: (context) => const ServiceRequest()),
                 );
               },
@@ -70,6 +76,44 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Hire service provider page'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => JobListing()),
+                );
+              },
+              child: const Text('Job Listing page'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => JobApplication()),
+                );
+              },
+              child: const Text('Job Application page'),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SPProfilePage()),
+                  );
+                },
+                child: const Text('Service Provider page')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AppliedJobs()),
+                  );
+                },
+                child: const Text('Applied Jobs page'))
           ],
         ),
       ),

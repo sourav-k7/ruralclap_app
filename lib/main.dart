@@ -49,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                        
                       builder: (context) => const CreateJobPage()),
                 );
               },
@@ -60,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                        
                       builder: (context) => const ServiceRequest()),
                 );
               },
@@ -80,8 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => JobListing()),
+                  MaterialPageRoute(builder: (context) => JobListing()),
                 );
               },
               child: const Text('Job Listing page'),
@@ -90,8 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => JobApplication()),
+                  MaterialPageRoute(builder: (context) => JobApplication()),
                 );
               },
               child: const Text('Job Application page'),

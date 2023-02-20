@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
-<<<<<<< HEAD
-import 'package:ruralclap_app/pages/service_provider_list_page.dart';
-import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
-=======
 import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
->>>>>>> 5f587c034632baf0fea496a0024764732c4e3665
 import 'package:ruralclap_app/pages/service_request_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/job_application_page.dart';
@@ -54,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                        
                       builder: (context) => const CreateJobPage()),
                 );
               },
@@ -65,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                        
                       builder: (context) => const ServiceRequest()),
                 );
               },
@@ -85,8 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => JobListing()),
+                  MaterialPageRoute(builder: (context) => JobListing()),
                 );
               },
               child: const Text('Job Listing page'),
@@ -95,8 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => JobApplication()),
+                  MaterialPageRoute(builder: (context) => JobApplication()),
                 );
               },
               child: const Text('Job Application page'),

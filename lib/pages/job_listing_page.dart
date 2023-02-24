@@ -3,6 +3,7 @@ import '/widgets/search_bar.dart';
 import '/widgets/job_card.dart';
 import '/widgets/bottom_navbar.dart';
 
+
 class JobListing extends StatefulWidget{
   @override
   _JobListingState createState() => _JobListingState();

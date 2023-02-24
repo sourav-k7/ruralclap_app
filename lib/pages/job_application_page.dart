@@ -59,6 +59,7 @@ class _JobApplicationState extends State<JobApplication> {
             alignment: Alignment.center,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                backgroundColor: ColorConstant.primaryColor,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 textStyle:

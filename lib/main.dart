@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ruralclap',
       theme: ThemeData(
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         primarySwatch: const MaterialColor(0xFF0066ff, <int, Color>{
           50: Color(0xFF5C9DFF),
           100: Color(0xFF4791FF),

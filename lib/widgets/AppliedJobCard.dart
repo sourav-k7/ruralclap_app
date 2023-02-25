@@ -46,7 +46,7 @@ class AppliedJobCard extends StatelessWidget {
                 Column(
                   children: const [
                     Image(
-                        width: 60,
+                        width: 40,
                         image: NetworkImage(
                             'https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png')),
                   ],

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
-import 'package:ruralclap_app/pages/create_job_page.dart';
 import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 import 'package:ruralclap_app/pages/service_request_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/job_application_page.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Ruralclap',
       theme: ThemeData(
         fontFamily: 'Open Sans',
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const MyHomePage(),
+      getPages: RoutesClass.routes,
     );
   }
 }
@@ -81,11 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const CreateJobPage()),
-                );
+                Get.toNamed(RoutesClass.createJobPageRoute);
               },
               child: const Text('Create Job page'),
             ),

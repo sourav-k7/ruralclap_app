@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
-import 'package:ruralclap_app/pages/applied_job_page.dart';
-import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
-import 'package:ruralclap_app/pages/service_provider_list_page.dart';
-import 'package:ruralclap_app/pages/service_request_page.dart';
-import 'package:ruralclap_app/pages/job_listing_page.dart';
-import 'package:ruralclap_app/pages/job_application_page.dart';
 import 'package:ruralclap_app/pages/layout.dart';
 
 void main() {
@@ -16,13 +10,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ruralclap',
       theme: ThemeData(
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         primarySwatch: const MaterialColor(0xFF0066ff, <int, Color>{
           50: Color(0xFF5C9DFF),
           100: Color(0xFF4791FF),

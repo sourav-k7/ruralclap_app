@@ -22,23 +22,37 @@ class _AppliedJobs extends State<AppliedJobs> {
             "https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png",
         applicationStatus: "Selected",
         appliedDate: DateTime(2023, 5, 14),
-        numberOfApplicants: 448)
+        numberOfApplicants: 448),
+    Job(
+        postName: "Technical Support Engineer",
+        companyName: "SurveyMonkey",
+        companyLogo:
+            "https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png",
+        applicationStatus: "Selected",
+        appliedDate: DateTime(2023, 7, 12),
+        numberOfApplicants: 412),
+    Job(
+        postName: "Associate Software Engineer",
+        companyName: "Searce",
+        companyLogo:
+            "https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png",
+        applicationStatus: "Selected",
+        appliedDate: DateTime(2023, 8, 4),
+        numberOfApplicants: 486),
+    Job(
+        postName: "Product Manager",
+        companyName: "Cockatoo",
+        companyLogo:
+            "https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png",
+        applicationStatus: "Selected",
+        appliedDate: DateTime(2023, 9, 24),
+        numberOfApplicants: 812)
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            constraints: const BoxConstraints(),
-            icon: const FaIcon(
-              FontAwesomeIcons.chevronLeft,
-              size: 20,
-              color: ColorConstant.textPrimaryBlack,
-            )),
         title: const Text(
           'My Applied Jobs',
           textAlign: TextAlign.center,

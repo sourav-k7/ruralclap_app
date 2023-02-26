@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruralclap_app/pages/job_information.dart';
 
 class JobCard extends StatelessWidget {
   const JobCard({super.key});
@@ -28,41 +29,7 @@ class JobCard extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(builder: (BuildContext context) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          leading: IconButton(
-                            icon: Icon(Icons.arrow_back, color: Colors.black),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          title: Text(
-                            "Jobs",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                          centerTitle: false,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
-                        body: Center(
-                          child: Hero(
-                            tag: 'ListTile-Hero',
-                            child: Material(
-                              child: ListTile(
-                                title: const Text('Job information'),
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
+                      return job_information();
                     }),
                   );
                 },

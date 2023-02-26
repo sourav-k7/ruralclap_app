@@ -45,7 +45,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.folder),
-            label: 'My Applies',
+            label: 'My Jobs',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

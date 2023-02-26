@@ -30,16 +30,9 @@ class _SPProfilePage extends State<SPProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      IconButton(
-                          onPressed: null,
-                          icon: FaIcon(
-                            FontAwesomeIcons.chevronLeft,
-                            color: Colors.black,
-                            size: 20,
-                          )),
                       Row(
                         children: [
                           IconButton(

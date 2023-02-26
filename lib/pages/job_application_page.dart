@@ -17,6 +17,7 @@ class _JobApplicationState extends State<JobApplication> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
+          constraints: BoxConstraints(),
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
@@ -59,11 +60,11 @@ class _JobApplicationState extends State<JobApplication> {
             alignment: Alignment.center,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: ColorConstant.primaryColor,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                textStyle:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  backgroundColor: ColorConstant.primaryColor,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  textStyle: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold)),
               child: const Text('Apply'),
               onPressed: () {},
             ),

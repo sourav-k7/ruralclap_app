@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ruralclap_app/constant/classes.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 
 class AppliedJobCard extends StatelessWidget {
-  const AppliedJobCard({
-    super.key,
-  });
-
+  final Job job;
+  const AppliedJobCard({required this.job});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,37 +23,34 @@ class AppliedJobCard extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'iOS Team Lead',
-                      style: TextStyle(
-                        fontSize: 20,
+                      job.postName,
+                      style: const TextStyle(
+                        fontSize: 18,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 1.25,
                         color: ColorConstant.textPrimaryBlack,
                       ),
                     ),
                     Text(
-                      'Vernacular Internet Private Limited',
-                      style: TextStyle(
-                          fontSize: 16,
+                      job.companyName,
+                      style: const TextStyle(
+                          fontSize: 14,
                           letterSpacing: 1.15,
                           fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),
                 Column(
-                  children: const [
-                    Image(
-                        width: 40,
-                        image: NetworkImage(
-                            'https://brandlogovector.com/wp-content/uploads/2020/09/Uber-Logo.png')),
+                  children: [
+                    Image(width: 40, image: NetworkImage(job.companyLogo)),
                   ],
                 ),
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Container(
               width: 110,
@@ -64,8 +60,8 @@ class AppliedJobCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  IconButton(
+                children: [
+                  const IconButton(
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
                     icon: FaIcon(
@@ -75,8 +71,8 @@ class AppliedJobCard extends StatelessWidget {
                     onPressed: null,
                   ),
                   Text(
-                    'Selected',
-                    style: TextStyle(
+                    job.applicationStatus,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       letterSpacing: 1.25,
@@ -97,19 +93,19 @@ class AppliedJobCard extends StatelessWidget {
                 Column(
                   children: [
                     Row(
-                      children: const [
-                        IconButton(
+                      children: [
+                        const IconButton(
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints(),
                             onPressed: null,
                             icon: FaIcon(
                               FontAwesomeIcons.calendar,
-                              size: 18,
+                              size: 20,
                             )),
                         Text(
-                          'Applied on 14th May',
-                          style: TextStyle(
-                            fontSize: 14,
+                          job.appliedDate.toString(),
+                          style: const TextStyle(
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                             letterSpacing: 1.02,
                             color: ColorConstant.textPrimaryBlack,
@@ -122,8 +118,8 @@ class AppliedJobCard extends StatelessWidget {
                 Column(
                   children: [
                     Row(
-                      children: const [
-                        IconButton(
+                      children: [
+                        const IconButton(
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints(),
                             onPressed: null,
@@ -131,13 +127,13 @@ class AppliedJobCard extends StatelessWidget {
                               FontAwesomeIcons.userGroup,
                               size: 16,
                             )),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
-                          '448 Applicants',
-                          style: TextStyle(
-                            fontSize: 16,
+                          '${job.numberOfApplicants} Applicants',
+                          style: const TextStyle(
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
                             letterSpacing: 1.5,
                           ),

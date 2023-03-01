@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
@@ -8,6 +9,7 @@ import 'package:ruralclap_app/pages/service_request_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/job_application_page.dart';
 import 'package:ruralclap_app/pages/layout.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage();
@@ -22,8 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Rural Clap"),
       ),
-      body: 
-      Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -92,8 +93,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => const AppliedJobs()),
                   );
                 },
-                child: const Text('Applied Jobs page')
-            ),
+                child: const Text('Applied Jobs page')),
+            ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(RoutesClass.loginPageRoute);
+                },
+                child: const Text('Login')),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/pages/layout.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      getPages: RoutesClass.routes,
       home: const BottomNav(),
     );
   }

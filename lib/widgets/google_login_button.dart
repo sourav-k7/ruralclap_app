@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ruralclap_app/utls/authentication.dart';
+import 'package:http/http.dart' as http;
 
 class GoogleSignInButton extends StatefulWidget {
   const GoogleSignInButton({super.key});
@@ -31,11 +34,29 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = true;
                 });
 
-                // TODO: Add method call to the Google Sign-In authentication
+                // User? user =
+                //     await Authentication.signInWithGoogle(context: context);
+                String? accessToken =
+                    await Authentication.signInWithGoogle(context: context);
 
                 setState(() {
                   _isSigningIn = false;
                 });
+
+                // if (user != null) {
+                print('success login');
+                try {
+                  // var token = await user.getIdToken();
+                  print(accessToken);
+                  var res = await http.post(
+                      Uri.parse(
+                          'http://192.168.0.105:8000/authentication/rest-auth/google/'),
+                      headers: {'Authorization': 'Bearer $accessToken'});
+                  print(res.body);
+                } catch (e) {
+                  print(e);
+                }
+                // }
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

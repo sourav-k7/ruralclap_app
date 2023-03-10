@@ -1,6 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiRoutes {
-  static const String url = 'http://192.168.137.1:8000';
+  static String url = 'http://${dotenv.env['IP']!}:8000';
 
   //Login api
-  static const String loginApi = '$url/authentication/rest-auth/google/';
+  static String loginApi = '$url/authentication/rest-auth/google/';
 }

@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ruralclap_app/utls/authentication.dart';
+import 'package:get/get.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:ruralclap_app/utls/googleAuth.dart';
 import 'package:http/http.dart' as http;
+import 'package:ruralclap_app/utls/routes.dart';
 
 class GoogleSignInButton extends StatefulWidget {
   const GoogleSignInButton({super.key});
@@ -11,6 +13,7 @@ class GoogleSignInButton extends StatefulWidget {
 
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   bool _isSigningIn = false;
+  final UserController _userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,30 +36,14 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 setState(() {
                   _isSigningIn = true;
                 });
-
-                // User? user =
-                //     await Authentication.signInWithGoogle(context: context);
-                String? accessToken =
-                    await Authentication.signInWithGoogle(context: context);
-
+                await _userController.login();
+                if (_userController.user.name == null) {
+                } else {
+                  Get.toNamed(RoutesClass.layoutPageRoute);
+                }
                 setState(() {
                   _isSigningIn = false;
                 });
-
-                // if (user != null) {
-                print('success login');
-                try {
-                  // var token = await user.getIdToken();
-                  print(accessToken);
-                  var res = await http.post(
-                      Uri.parse(
-                          'http://192.168.0.105:8000/authentication/rest-auth/google/'),
-                      headers: {'Authorization': 'Bearer $accessToken'});
-                  print(res.body);
-                } catch (e) {
-                  print(e);
-                }
-                // }
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

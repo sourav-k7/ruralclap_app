@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/widgets/google_login_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +17,20 @@ class LoginPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [Text('Login'), GoogleSignInButton()]),
+      body:
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
+        SizedBox(
+          child: Text(
+            'Login',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.start,
+          ),
+        ),
+        GoogleSignInButton(),
+      ]),
     );
   }
 }

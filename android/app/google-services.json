@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "422436897824",
+    "project_id": "rural-clap-379707",
+    "storage_bucket": "rural-clap-379707.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422436897824:android:3ba0289d99c76472c32845",
+        "android_client_info": {
+          "package_name": "com.example.ruralclap_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422436897824-dmi072rgnmpa4lv338nekpjhoblfqh10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ruralclap_app",
+            "certificate_hash": "558d58c650dafe5ef0f819a66df9ece5b3355c6e"
+          }
+        },
+        {
+          "client_id": "422436897824-0hi2bri1g7p7a0djlil856p506k9aalp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGCFsqXAqUdI1UpXT4VwsAM-Nqj4yUGfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422436897824-0hi2bri1g7p7a0djlil856p506k9aalp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

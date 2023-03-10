@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/controllers/user.dart';
-import 'package:ruralclap_app/utls/googleAuth.dart';
-import 'package:http/http.dart' as http;
 import 'package:ruralclap_app/utls/routes.dart';
 
 class GoogleSignInButton extends StatefulWidget {
@@ -41,9 +39,9 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = false;
                 });
                 if (_userController.user.name == null) {
-                  Get.toNamed(RoutesClass.onboardingPage);
+                  Get.offAndToNamed(RoutesClass.onboardingPage);
                 } else {
-                  Get.toNamed(RoutesClass.layoutPageRoute);
+                  Get.offAndToNamed(RoutesClass.layoutPageRoute);
                 }
               },
               child: Padding(

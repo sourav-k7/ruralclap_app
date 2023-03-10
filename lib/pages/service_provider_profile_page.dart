@@ -185,6 +185,7 @@ class _SPProfilePage extends State<SPProfilePage> {
                                       ),
                                       IconButton(
                                           onPressed: null,
+                                          constraints: BoxConstraints(),
                                           icon: FaIcon(
                                             FontAwesomeIcons.pen,
                                             size: 18,
@@ -235,6 +236,7 @@ class _SPProfilePage extends State<SPProfilePage> {
                                             letterSpacing: 1.02),
                                       ),
                                       IconButton(
+                                          constraints: BoxConstraints(),
                                           onPressed: null,
                                           icon: FaIcon(
                                             FontAwesomeIcons.pen,
@@ -290,6 +292,7 @@ class _SPProfilePage extends State<SPProfilePage> {
                                       ),
                                       IconButton(
                                           onPressed: null,
+                                          constraints: BoxConstraints(),
                                           icon: FaIcon(
                                             FontAwesomeIcons.pen,
                                             size: 18,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/controllers/user.dart';
-import 'package:ruralclap_app/utls/googleAuth.dart';
-import 'package:http/http.dart' as http;
 import 'package:ruralclap_app/utls/routes.dart';
 
 class GoogleSignInButton extends StatefulWidget {

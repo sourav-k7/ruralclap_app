@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/services/auth_service.dart';
-import '../utls/googleAuth.dart';
 import '../widgets/errorSnackBar.dart';
+import '../utls/google_auth.dart';
 
 class UserController extends GetxController {
   final Rx<User> _user = User().obs;

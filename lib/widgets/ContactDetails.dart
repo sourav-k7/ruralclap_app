@@ -16,7 +16,7 @@ class ContactDetails extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                children: [
+                children: const [
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
@@ -38,11 +38,11 @@ class ContactDetails extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
-                children: [
+                children: const [
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
@@ -64,11 +64,11 @@ class ContactDetails extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
-                children: [
+                children: const [
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
@@ -90,11 +90,11 @@ class ContactDetails extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
-                children: [
+                children: const [
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
@@ -116,11 +116,11 @@ class ContactDetails extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
-                children: [
+                children: const [
                   IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),

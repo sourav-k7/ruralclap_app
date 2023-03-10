@@ -42,6 +42,7 @@ dependencies:
   google_sign_in: ^6.0.2
   http: ^0.13.5
   flutter_dotenv: ^5.0.2
+  custom_radio_grouped_button: ^2.1.2+2
 
 dev_dependencies:
   flutter_test:

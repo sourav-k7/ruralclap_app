@@ -41,9 +41,9 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = false;
                 });
                 if (_userController.user.name == null) {
-                  Get.toNamed(RoutesClass.onboardingPage);
+                  Get.offAndToNamed(RoutesClass.onboardingPage);
                 } else {
-                  Get.toNamed(RoutesClass.layoutPageRoute);
+                  Get.offAndToNamed(RoutesClass.layoutPageRoute);
                 }
               },
               child: Padding(

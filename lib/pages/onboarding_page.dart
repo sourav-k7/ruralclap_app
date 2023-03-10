@@ -11,6 +11,8 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   final _formKey = GlobalKey<FormState>();
 
+  String? user; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +40,26 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
+                ),
+                RadioListTile(
+                  title: Text("Employer"),
+                  value: "employer", 
+                  groupValue: user,
+                  onChanged: (value){
+                    setState(() {
+                        user = value.toString();
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: Text("Service Provider"),
+                  value: "service_provider", 
+                  groupValue: user, 
+                  onChanged: (value){
+                    setState(() {
+                        user = value.toString();
+                    });
+                  },
                 ),
                 const SizedBox(
                   height: 10,
@@ -67,21 +89,35 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Rating'),
-                TextFormField(),
-                const SizedBox(
-                  height: 10,
-                ),
                 const Text('Gender'),
                 TextFormField(),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Skills'),
-                TextFormField(),
-                const SizedBox(
-                  height: 10,
+                if (user=="service_provider") ...[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text('Skills'),
+                    TextFormField(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                  ],
                 ),
+                ],
+                if (user=="service_provider") ...[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text('Expected Pay'),
+                    TextFormField(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                  ],
+                ),
+                ],
                 const Text('Description'),
                 TextFormField(),
                 const SizedBox(

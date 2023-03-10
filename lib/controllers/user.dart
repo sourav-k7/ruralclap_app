@@ -12,7 +12,7 @@ class UserController extends GetxController {
     if (accessToken != null) {
       var res = await AuthServices.verifyTokenService(accessToken: accessToken);
       if (!res['isNewUser']) {
-        _user.value = User.fromJson(res.userData);
+        _user.value = User.fromJson(res["userData"]);
       }
     } else {
       errorSnackBar(content: 'Some error occured');

@@ -11,7 +11,7 @@ class UserController extends GetxController {
     String? accessToken = await GoogleAuth.signInWithGoogle();
     if (accessToken != null) {
       var res = await AuthServices.verifyTokenService(accessToken: accessToken);
-      if (!res.isNewUser) {
+      if (!res['isNewUser']) {
         _user.value = User.fromJson(res.userData);
       }
     } else {

@@ -13,10 +13,10 @@ class AuthServices {
       Uri.parse(ApiRoutes.loginApi),
       headers: {...headers, 'Authorization': 'Bearer $accessToken'},
     );
-
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
+      print(response.body.toString());
       print('some error');
       // String error = jsonDecode(response.body)['message'];
       // throw (error);

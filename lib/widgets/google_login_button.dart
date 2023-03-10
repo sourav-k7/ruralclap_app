@@ -15,7 +15,8 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     //CHANGE CLIENT ID WITH RESPECT TO YOUR OWN CLIENT ID!!!!!!!
     final GoogleSignIn googleSignIn = GoogleSignIn(
       clientId:
-          '422436897824-jkjfr2tj51118i0d0h6fq7ucnutkfgtq.apps.googleusercontent.com',
+          '422436897824-ok56fv7r4s08jofbaennif59r7gce99s.apps.googleusercontent.com',
+      // Do not change this, only change client id
       serverClientId:
           '422436897824-v7gfeacadmg099objpl7269e3kmflsf0.apps.googleusercontent.com',
     );
@@ -58,7 +59,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   // var token = await user.getIdToken();
                   var res = await http.post(
                       Uri.parse(
-                          'http://192.168.137.1:8000/authentication/rest-auth/google/'),
+                          'http://192.168.1.107:8000/authentication/rest-auth/google/'),
                       headers: {'Authorization': 'Bearer $accessToken'});
                   print(res.body);
                 } catch (e) {

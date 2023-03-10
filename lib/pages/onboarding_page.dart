@@ -20,21 +20,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Service Provider",
+          "Help Us Onboard You!",
           style: TextStyle(
               letterSpacing: 1.5,
               fontSize: 18,
               color: ColorConstant.textPrimaryWhite,
               fontWeight: FontWeight.w600),
         ),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const FaIcon(
-              FontAwesomeIcons.chevronLeft,
-              size: 18,
-            )),
+        automaticallyImplyLeading: false,
         backgroundColor: ColorConstant.primaryColor,
       ),
       body: SingleChildScrollView(
@@ -81,7 +74,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Form(
                 key: _formKey,
                 child: Column(

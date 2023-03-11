@@ -4,6 +4,7 @@ import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/utls/TextField_Validator.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -110,6 +111,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 10,
                     ),
                     TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
                       onChanged: (value) {
                         name = value;
                       },
@@ -269,6 +275,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 10,
                     ),
                     TextFormField(
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
+                        },
                         onChanged: (value) {
                           gender = value;
                         },
@@ -304,6 +315,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
+                              validator: (input) {
+                                String? error;
+                                error = FormFieldValidate.isEmpty(input ?? '');
+                                return error;
+                              },
                               onChanged: (value) {
                                 skills = value;
                               },
@@ -345,6 +361,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           TextFormField(
+                              validator: (input) {
+                                String? error;
+                                error = FormFieldValidate.isEmpty(input ?? '');
+                                return error;
+                              },
                               onChanged: (value) {
                                 expectedPay = value;
                               },
@@ -380,6 +401,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ),
                     ],
                     TextFormField(
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
+                        },
                         onChanged: (value) {
                           description = value;
                         },
@@ -412,7 +438,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        {}
+                        if (_formKey.currentState!.validate()) {}
                       },
                       style: ButtonStyle(
                           minimumSize:

@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.5
   flutter_dotenv: ^5.0.2
   custom_radio_grouped_button: ^2.1.2+2
+  flutter_secure_storage: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -115,8 +116,8 @@ flutter:
           weight: 100
         - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
           weight: 100
-          style: italic 
-  
+          style: italic
+
   #      - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

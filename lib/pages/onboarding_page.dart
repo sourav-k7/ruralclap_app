@@ -4,7 +4,9 @@ import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/utls/TextField_Validator.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -17,6 +19,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
   TextEditingController emailController = TextEditingController();
+  final User _user = User();
+  var isCreatingUser = false;
 
   @override
   void initState() {
@@ -24,20 +28,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     if (_userController.user.email != null) {
       emailController.text = _userController.user.email!;
+      _user.email = _userController.user.email!;
     }
+    _user.isEmployer = true;
   }
 
   String? user = "employer";
-  String? name = "";
-  String? language = "";
-  String? location = "";
-  String? contactNumber = "";
-  String? emailId = "";
-  String? gender = "";
-  String? skills = "";
-  String? expectedPay = "";
-  String? description = "";
-  bool? isEmployer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +86,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     radioButtonValue: (value) {
                       setState(() {
                         user = value;
-                        value == "employer"
-                            ? isEmployer = true
-                            : isEmployer = false;
+                        user == "employer"
+                            ? _user.isEmployer = true
+                            : _user.isEmployer = false;
                       });
                     },
                     selectedColor: ColorConstant.primaryColor,
@@ -117,22 +113,26 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         return error;
                       },
                       onChanged: (value) {
-                        name = value;
+                        _user.name = value;
                       },
                       decoration: const InputDecoration(
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: ColorConstant.lightBackgroundColor,
-                              width: 2.0),
+                              width: 1.5),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorConstant.primaryColor, width: 2.0),
+                              color: ColorConstant.primaryColor, width: 1.5),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorConstant.error, width: 2.0),
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
                         ),
                         labelText: "Name",
                         labelStyle: TextStyle(
@@ -149,22 +149,31 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        language = value;
+                        _user.language = value;
+                      },
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
                       },
                       decoration: const InputDecoration(
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: ColorConstant.lightBackgroundColor,
-                              width: 2.0),
+                              width: 1.5),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorConstant.primaryColor, width: 2.0),
+                              color: ColorConstant.primaryColor, width: 1.5),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: ColorConstant.error, width: 2.0),
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
                         ),
                         labelText: "Language",
                         labelStyle: TextStyle(
@@ -181,7 +190,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     TextFormField(
                         onChanged: (value) {
-                          location = value;
+                          _user.location = value;
+                        },
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
                         },
                         decoration: const InputDecoration(
                           filled: true,
@@ -195,6 +209,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 color: ColorConstant.primaryColor, width: 2.0),
                           ),
                           errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorConstant.error, width: 2.0),
                           ),
@@ -212,7 +230,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        contactNumber = value;
+                        _user.phone = int.parse(value);
+                      },
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        error = FormFieldValidate.isPhoneNo(input ?? '');
+                        return error;
                       },
                       decoration: const InputDecoration(
                         filled: true,
@@ -226,6 +250,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               color: ColorConstant.primaryColor, width: 2.0),
                         ),
                         errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: ColorConstant.error, width: 2.0),
                         ),
@@ -259,6 +287,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           borderSide: BorderSide(
                               color: ColorConstant.error, width: 2.0),
                         ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
                         labelText: "Email Id",
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -281,7 +313,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           return error;
                         },
                         onChanged: (value) {
-                          gender = value;
+                          _user.gender = value;
                         },
                         decoration: const InputDecoration(
                           filled: true,
@@ -298,6 +330,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             borderSide: BorderSide(
                                 color: ColorConstant.error, width: 2.0),
                           ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
                           labelText: "Gender",
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.w500,
@@ -308,7 +344,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           focusColor: ColorConstant.lightBackgroundColor,
                         )),
                     const SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
                     if (user == "service_provider") ...[
                       Column(
@@ -321,7 +357,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 return error;
                               },
                               onChanged: (value) {
-                                skills = value;
+                                _user.skills = value;
                               },
                               decoration: const InputDecoration(
                                 filled: true,
@@ -336,6 +372,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                       width: 2.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: ColorConstant.error, width: 2.0),
                                 ),
@@ -367,7 +407,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 return error;
                               },
                               onChanged: (value) {
-                                expectedPay = value;
+                                _user.expectedPayment = int.parse(value);
                               },
                               decoration: const InputDecoration(
                                 filled: true,
@@ -382,6 +422,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                       width: 2.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: ColorConstant.error, width: 2.0),
                                 ),
@@ -407,7 +451,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           return error;
                         },
                         onChanged: (value) {
-                          description = value;
+                          _user.description = value;
                         },
                         decoration: const InputDecoration(
                           filled: true,
@@ -421,6 +465,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 color: ColorConstant.primaryColor, width: 2.0),
                           ),
                           errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorConstant.error, width: 2.0),
                           ),
@@ -438,7 +486,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
+                        setState(() {
+                          isCreatingUser = true;
+                        });
+                        if (_formKey.currentState!.validate()) {
+                          _userController.createUser(userData: _user);
+                        }
+                        setState(() {
+                          isCreatingUser = false;
+                        });
+                        if (_userController.user.isEmployer == false) {
+                          Get.offAndToNamed(RoutesClass.createJobPageRoute);
+                        } else if (_userController.user.isEmployer == true) {
+                          Get.offAndToNamed(RoutesClass.jobListingPageRoute);
+                        }
                       },
                       style: ButtonStyle(
                           minimumSize:

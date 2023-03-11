@@ -22,17 +22,15 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Text(
-              'Login',
+              'Ruralclap',
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                fontWeight: FontWeight.w900,
               ),
-              textAlign: TextAlign.start,
             ),
-            SizedBox(
-              height: 40,
-            ),
+            Spacer(),
             GoogleSignInButton(),
+            Spacer(),
           ]),
     );
   }

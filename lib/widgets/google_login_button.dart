@@ -44,29 +44,32 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   Get.offAndToNamed(RoutesClass.layoutPageRoute);
                 }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Image(
-                      image: AssetImage(
-                        "assets/images/google_logo.png",
-                      ),
-                      height: 24.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Sign in with Google',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
+              child: Material(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Image(
+                        image: AssetImage(
+                          "assets/images/google_logo.png",
                         ),
+                        height: 24.0,
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

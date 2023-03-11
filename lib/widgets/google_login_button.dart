@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
@@ -18,8 +19,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: _isSigningIn
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ? const Center(
+              child: CircularProgressIndicator(
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(ColorConstant.primaryColor),
+              ),
             )
           : OutlinedButton(
               style: ButtonStyle(

@@ -496,7 +496,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           isCreatingUser = false;
                         });
                         if (_userController.user.isEmployer == false) {
-                          Get.offAndToNamed(RoutesClass.createJobPageRoute);
+                          Get.offAndToNamed(RoutesClass.layoutPageRoute);
                         } else if (_userController.user.isEmployer == true) {
                           Get.offAndToNamed(RoutesClass.jobListingPageRoute);
                         }

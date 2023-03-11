@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
@@ -18,8 +19,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: _isSigningIn
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ? const Center(
+              child: CircularProgressIndicator(
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(ColorConstant.primaryColor),
+              ),
             )
           : OutlinedButton(
               style: ButtonStyle(
@@ -44,29 +48,32 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   Get.offAndToNamed(RoutesClass.layoutPageRoute);
                 }
               },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Image(
-                      image: AssetImage(
-                        "assets/images/google_logo.png",
-                      ),
-                      height: 24.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Sign in with Google',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
+              child: Material(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Image(
+                        image: AssetImage(
+                          "assets/images/google_logo.png",
                         ),
+                        height: 24.0,
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

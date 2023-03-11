@@ -17,20 +17,21 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body:
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
-        SizedBox(
-          child: Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Text(
+              'Ruralclap',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w900,
+              ),
             ),
-            textAlign: TextAlign.start,
-          ),
-        ),
-        GoogleSignInButton(),
-      ]),
+            Spacer(),
+            GoogleSignInButton(),
+            Spacer(),
+          ]),
     );
   }
 }

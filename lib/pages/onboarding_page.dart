@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:ruralclap_app/utls/TextField_Validator.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -84,22 +85,49 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 10,
                     ),
                     const Text('Name'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     const Text('Language'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     const Text('Location'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
                     const Text('Contact No.'),
-                    TextFormField(),
+                    TextFormField(
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(value ?? '');
+                        error =
+                            error ?? FormFieldValidate.isPhoneNo(value ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -109,7 +137,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 10,
                     ),
                     const Text('Gender'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -118,7 +152,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Text('Skills'),
-                          TextFormField(),
+                          TextFormField(
+                            validator: (input) {
+                              String? error;
+                              error = FormFieldValidate.isEmpty(input ?? '');
+                              return error;
+                            },
+                          ),
                           const SizedBox(
                             height: 40,
                           ),
@@ -130,7 +170,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Text('Expected Pay'),
-                          TextFormField(),
+                          TextFormField(
+                            validator: (input) {
+                              String? error;
+                              error = FormFieldValidate.isEmpty(input ?? '');
+                              return error;
+                            },
+                          ),
                           const SizedBox(
                             height: 40,
                           ),
@@ -138,12 +184,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ),
                     ],
                     const Text('Description'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                    ),
                     const SizedBox(
                       height: 40,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {}
+                      },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                       ),

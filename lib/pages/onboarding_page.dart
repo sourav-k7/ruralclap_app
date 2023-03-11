@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -12,8 +14,29 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   final _formKey = GlobalKey<FormState>();
+  final UserController _userController = Get.find<UserController>();
+  TextEditingController emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (_userController.user.email != null) {
+      emailController.text = _userController.user.email!;
+    }
+  }
 
   String? user = "employer";
+  String? name = "";
+  String? language = "";
+  String? location = "";
+  String? contactNumber = "";
+  String? emailId = "";
+  String? gender = "";
+  String? skills = "";
+  String? expectedPay = "";
+  String? description = "";
+  bool? isEmployer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +89,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     radioButtonValue: (value) {
                       setState(() {
                         user = value;
+                        value == "employer"
+                            ? isEmployer = true
+                            : isEmployer = false;
                       });
                     },
                     selectedColor: ColorConstant.primaryColor,
@@ -83,33 +109,193 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Name'),
-                    TextFormField(),
+                    TextFormField(
+                      onChanged: (value) {
+                        name = value;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Name",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        language = value;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Language",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Language'),
-                    TextFormField(),
+                    TextFormField(
+                        onChanged: (value) {
+                          location = value;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Location",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Location'),
-                    TextFormField(),
+                    TextFormField(
+                      onChanged: (value) {
+                        contactNumber = value;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Mobile Number",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Contact No.'),
-                    TextFormField(),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Email Id",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                      readOnly: true,
+                      enabled: false,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Email Id'),
-                    TextFormField(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text('Gender'),
-                    TextFormField(),
+                    TextFormField(
+                        onChanged: (value) {
+                          gender = value;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Gender",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
                       height: 10,
                     ),
@@ -117,10 +303,39 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text('Skills'),
-                          TextFormField(),
+                          TextFormField(
+                              onChanged: (value) {
+                                skills = value;
+                              },
+                              decoration: const InputDecoration(
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.lightBackgroundColor,
+                                      width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.primaryColor,
+                                      width: 2.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                labelText: "Skills",
+                                hintText:
+                                    "Please enter ',' (comma) seperated skills",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1.2,
+                                  color: ColorConstant.textPrimaryBlack,
+                                ),
+                                fillColor: ColorConstant.lightBackgroundColor,
+                                focusColor: ColorConstant.lightBackgroundColor,
+                              )),
                           const SizedBox(
-                            height: 40,
+                            height: 20,
                           ),
                         ],
                       ),
@@ -129,24 +344,79 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text('Expected Pay'),
-                          TextFormField(),
+                          TextFormField(
+                              onChanged: (value) {
+                                expectedPay = value;
+                              },
+                              decoration: const InputDecoration(
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.lightBackgroundColor,
+                                      width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.primaryColor,
+                                      width: 2.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                labelText: "Expected Pay",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1.2,
+                                  color: ColorConstant.textPrimaryBlack,
+                                ),
+                                fillColor: ColorConstant.lightBackgroundColor,
+                                focusColor: ColorConstant.lightBackgroundColor,
+                              )),
                           const SizedBox(
-                            height: 40,
+                            height: 20,
                           ),
                         ],
                       ),
                     ],
-                    const Text('Description'),
-                    TextFormField(),
+                    TextFormField(
+                        onChanged: (value) {
+                          description = value;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Description",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
                       height: 40,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                      ),
+                      onPressed: () {
+                        {}
+                      },
+                      style: ButtonStyle(
+                          minimumSize:
+                              MaterialStateProperty.all(Size(360, 50))),
                       child: const Text('Submit'),
                     ),
                     const SizedBox(

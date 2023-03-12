@@ -12,7 +12,7 @@ class GoogleSignInButton extends StatefulWidget {
 
 class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   bool _isSigningIn = false;
-  final UserController _userController = Get.put(UserController());
+  final UserController _userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {

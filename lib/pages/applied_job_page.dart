@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/widgets/AppliedJobCard.dart';
-import 'package:ruralclap_app/widgets/ContactDetails.dart';
-import 'package:ruralclap_app/widgets/PastExperience.dart';
 import 'package:ruralclap_app/constant/classes.dart';
 
 class AppliedJobs extends StatefulWidget {

@@ -6,14 +6,14 @@ import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/widgets/ContactDetails.dart';
 import 'package:ruralclap_app/widgets/PastExperience.dart';
 
-class SPProfilePage extends StatefulWidget {
-  const SPProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<SPProfilePage> createState() => _SPProfilePage();
+  State<ProfilePage> createState() => _ProfilePage();
 }
 
-class _SPProfilePage extends State<SPProfilePage> {
+class _ProfilePage extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
 
   @override

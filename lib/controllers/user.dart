@@ -26,11 +26,11 @@ class UserController extends GetxController {
   }
 
   Future<void> createUser({required User userData}) async {
-    final storage = const FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     var accessToken = await storage.read(key: 'accessToken');
     if (accessToken != null) {
       var res = await UserServices.createUserService(
-          accessToken: accessToken as String, userData: userData);
+          accessToken: accessToken, userData: userData);
       if (res != 'Error400') {
         print("from user controller this is res");
         print(res.toString());

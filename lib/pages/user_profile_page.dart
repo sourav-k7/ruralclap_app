@@ -3,18 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 import 'package:ruralclap_app/widgets/ContactDetails.dart';
 import 'package:ruralclap_app/widgets/PastExperience.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
-
+  ProfilePage({super.key});
   @override
   State<ProfilePage> createState() => _ProfilePage();
 }
 
 class _ProfilePage extends State<ProfilePage> {
-  final _formKey = GlobalKey<FormState>();
+  final UserController _userController = Get.find<UserController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +77,8 @@ class _ProfilePage extends State<ProfilePage> {
                       Column(
                         children: [
                           CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://i.pinimg.com/originals/5b/23/9c/5b239c2428af9b5ec230bdf830251adb.jpg'),
+                            backgroundImage: AssetImage(
+                                "assets/images/${_userController.user.gender!.toLowerCase()}-avatar.png"),
                             radius: 90,
                           ),
                           SizedBox(
@@ -79,7 +86,7 @@ class _ProfilePage extends State<ProfilePage> {
                           ),
                           Text(
                             textAlign: TextAlign.center,
-                            'Kakashi Hatake',
+                            _userController.user.name!,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 24,
@@ -106,49 +113,51 @@ class _ProfilePage extends State<ProfilePage> {
                   SizedBox(
                     height: 30,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                ColorConstant.primaryColor),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(150, 40)),
-                          ),
-                          onPressed: null,
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            'Connect',
-                            style: TextStyle(
-                              color: ColorConstant.textPrimaryWhite,
-                              fontSize: 16,
-                              letterSpacing: 2.0,
-                            ),
-                          )),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              side: MaterialStateProperty.all(BorderSide(
-                                color: ColorConstant.primaryColor,
-                                width: 1,
-                              )),
+                  if (_userController.user.isEmployer == false) ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  ColorConstant.primaryColor),
                               minimumSize: MaterialStateProperty.all(
                                   const Size(150, 40)),
-                              backgroundColor: MaterialStatePropertyAll(
-                                  ColorConstant.textPrimaryWhite)),
-                          onPressed: null,
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            'Message',
-                            style: TextStyle(
-                              color: ColorConstant.primaryColor,
-                              fontSize: 16,
-                              letterSpacing: 2.0,
                             ),
-                          ))
-                    ],
-                  ),
+                            onPressed: null,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'Connect',
+                              style: TextStyle(
+                                color: ColorConstant.textPrimaryWhite,
+                                fontSize: 16,
+                                letterSpacing: 2.0,
+                              ),
+                            )),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                side: MaterialStateProperty.all(BorderSide(
+                                  color: ColorConstant.primaryColor,
+                                  width: 1,
+                                )),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(150, 40)),
+                                backgroundColor: MaterialStatePropertyAll(
+                                    ColorConstant.textPrimaryWhite)),
+                            onPressed: null,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'Message',
+                              style: TextStyle(
+                                color: ColorConstant.primaryColor,
+                                fontSize: 16,
+                                letterSpacing: 2.0,
+                              ),
+                            ))
+                      ],
+                    )
+                  ],
                   SizedBox(
                     height: 20,
                   ),
@@ -197,7 +206,7 @@ class _ProfilePage extends State<ProfilePage> {
                                   SizedBox(height: 5),
                                   Text(
                                     textAlign: TextAlign.justify,
-                                    "I want to write anything i can here while im adesigning the card this is nothing but a place holder you can think of it as a lorem epsum that i typed because i got bored coding hahahahaha",
+                                    _userController.user.description!,
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.grey,
@@ -228,7 +237,9 @@ class _ProfilePage extends State<ProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Past Experiences',
+                                        _userController.user.isEmployer!
+                                            ? "Jobs you Created in the Past"
+                                            : "Past Experiences",
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontSize: 18,
@@ -237,9 +248,17 @@ class _ProfilePage extends State<ProfilePage> {
                                       ),
                                       IconButton(
                                           constraints: BoxConstraints(),
-                                          onPressed: null,
+                                          onPressed: () {
+                                            _userController.user.isEmployer!
+                                                ? Get.offAndToNamed(RoutesClass
+                                                    .createJobPageRoute)
+                                                : Get.offAndToNamed(RoutesClass
+                                                    .layoutPageRoute);
+                                          },
                                           icon: FaIcon(
-                                            FontAwesomeIcons.pen,
+                                            _userController.user.isEmployer!
+                                                ? FontAwesomeIcons.plus
+                                                : FontAwesomeIcons.pen,
                                             size: 18,
                                             color:
                                                 ColorConstant.textPrimaryBlack,

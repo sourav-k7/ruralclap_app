@@ -42,10 +42,14 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 setState(() {
                   _isSigningIn = false;
                 });
-                if (_userController.user.name == null) {
+                if (_userController.user.location == null) {
                   Get.offAndToNamed(RoutesClass.onboardingPage);
-                } else {
-                  Get.offAndToNamed(RoutesClass.layoutPageRoute);
+                } else if (_userController.user.location != null) {
+                  if (_userController.user.isEmployer == false) {
+                    Get.offAndToNamed(RoutesClass.layoutPageRoute);
+                  } else if (_userController.user.isEmployer == true) {
+                    Get.offAndToNamed(RoutesClass.jobListingPageRoute);
+                  }
                 }
               },
               child: Material(

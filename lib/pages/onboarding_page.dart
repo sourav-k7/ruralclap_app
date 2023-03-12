@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
+import 'package:ruralclap_app/models/user.dart';
+import 'package:ruralclap_app/utls/TextField_Validator.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -12,6 +17,21 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   final _formKey = GlobalKey<FormState>();
+  final UserController _userController = Get.find<UserController>();
+  TextEditingController emailController = TextEditingController();
+  final User _user = User();
+  var isCreatingUser = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (_userController.user.email != null) {
+      emailController.text = _userController.user.email!;
+      _user.email = _userController.user.email!;
+    }
+    _user.isEmployer = true;
+  }
 
   String? user = "employer";
 
@@ -66,6 +86,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     radioButtonValue: (value) {
                       setState(() {
                         user = value;
+                        user == "employer"
+                            ? _user.isEmployer = true
+                            : _user.isEmployer = false;
                       });
                     },
                     selectedColor: ColorConstant.primaryColor,
@@ -83,44 +106,292 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Name'),
-                    TextFormField(),
+                    TextFormField(
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                      onChanged: (value) {
+                        _user.name = value;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 1.5),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        labelText: "Name",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        _user.language = value;
+                      },
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        return error;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 1.5),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 1.5),
+                        ),
+                        labelText: "Language",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Language'),
-                    TextFormField(),
+                    TextFormField(
+                        onChanged: (value) {
+                          _user.location = value;
+                        },
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Location",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Location'),
-                    TextFormField(),
+                    TextFormField(
+                      onChanged: (value) {
+                        _user.phone = int.parse(value);
+                      },
+                      validator: (input) {
+                        String? error;
+                        error = FormFieldValidate.isEmpty(input ?? '');
+                        error = FormFieldValidate.isPhoneNo(input ?? '');
+                        return error;
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Mobile Number",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Contact No.'),
-                    TextFormField(),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.lightBackgroundColor,
+                              width: 2.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.primaryColor, width: 2.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: ColorConstant.error, width: 2.0),
+                        ),
+                        labelText: "Email Id",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                          color: ColorConstant.textPrimaryBlack,
+                        ),
+                        fillColor: ColorConstant.lightBackgroundColor,
+                        focusColor: ColorConstant.lightBackgroundColor,
+                      ),
+                      readOnly: true,
+                      enabled: false,
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Email Id'),
-                    TextFormField(),
+                    TextFormField(
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
+                        },
+                        onChanged: (value) {
+                          _user.gender = value;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Gender",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    const Text('Gender'),
-                    TextFormField(),
-                    const SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
                     if (user == "service_provider") ...[
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text('Skills'),
-                          TextFormField(),
+                          TextFormField(
+                              validator: (input) {
+                                String? error;
+                                error = FormFieldValidate.isEmpty(input ?? '');
+                                return error;
+                              },
+                              onChanged: (value) {
+                                _user.skills = value;
+                              },
+                              decoration: const InputDecoration(
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.lightBackgroundColor,
+                                      width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.primaryColor,
+                                      width: 2.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                labelText: "Skills",
+                                hintText:
+                                    "Please enter ',' (comma) seperated skills",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1.2,
+                                  color: ColorConstant.textPrimaryBlack,
+                                ),
+                                fillColor: ColorConstant.lightBackgroundColor,
+                                focusColor: ColorConstant.lightBackgroundColor,
+                              )),
                           const SizedBox(
-                            height: 40,
+                            height: 20,
                           ),
                         ],
                       ),
@@ -129,24 +400,110 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Text('Expected Pay'),
-                          TextFormField(),
+                          TextFormField(
+                              validator: (input) {
+                                String? error;
+                                error = FormFieldValidate.isEmpty(input ?? '');
+                                return error;
+                              },
+                              onChanged: (value) {
+                                _user.expectedPayment = int.parse(value);
+                              },
+                              decoration: const InputDecoration(
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.lightBackgroundColor,
+                                      width: 2.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.primaryColor,
+                                      width: 2.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: ColorConstant.error, width: 2.0),
+                                ),
+                                labelText: "Expected Pay",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1.2,
+                                  color: ColorConstant.textPrimaryBlack,
+                                ),
+                                fillColor: ColorConstant.lightBackgroundColor,
+                                focusColor: ColorConstant.lightBackgroundColor,
+                              )),
                           const SizedBox(
-                            height: 40,
+                            height: 20,
                           ),
                         ],
                       ),
                     ],
-                    const Text('Description'),
-                    TextFormField(),
+                    TextFormField(
+                        validator: (input) {
+                          String? error;
+                          error = FormFieldValidate.isEmpty(input ?? '');
+                          return error;
+                        },
+                        onChanged: (value) {
+                          _user.description = value;
+                        },
+                        decoration: const InputDecoration(
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.lightBackgroundColor,
+                                width: 2.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.primaryColor, width: 2.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: ColorConstant.error, width: 2.0),
+                          ),
+                          labelText: "Description",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.2,
+                            color: ColorConstant.textPrimaryBlack,
+                          ),
+                          fillColor: ColorConstant.lightBackgroundColor,
+                          focusColor: ColorConstant.lightBackgroundColor,
+                        )),
                     const SizedBox(
                       height: 40,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                      ),
+                      onPressed: () {
+                        setState(() {
+                          isCreatingUser = true;
+                        });
+                        if (_formKey.currentState!.validate()) {
+                          _userController.createUser(userData: _user);
+                        }
+                        setState(() {
+                          isCreatingUser = false;
+                        });
+                        if (_userController.user.isEmployer == false) {
+                          Get.offAndToNamed(RoutesClass.layoutPageRoute);
+                        } else if (_userController.user.isEmployer == true) {
+                          Get.offAndToNamed(RoutesClass.jobListingPageRoute);
+                        }
+                      },
+                      style: ButtonStyle(
+                          minimumSize:
+                              MaterialStateProperty.all(Size(360, 50))),
                       child: const Text('Submit'),
                     ),
                     const SizedBox(

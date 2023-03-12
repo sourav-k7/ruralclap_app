@@ -5,4 +5,5 @@ class ApiRoutes {
 
   //Login api
   static String loginApi = '$url/authentication/rest-auth/google/';
+  static String createUserApi = '$url/users/create/';
 }

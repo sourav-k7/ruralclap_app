@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SPProfilePage()),
+                        builder: (context) => const ProfilePage()),
                   );
                 },
                 child: const Text('Service Provider page')),

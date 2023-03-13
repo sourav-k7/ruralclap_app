@@ -485,21 +485,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 40,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           isCreatingUser = true;
                         });
                         if (_formKey.currentState!.validate()) {
-                          _userController.createUser(userData: _user);
+                          await _userController.createUser(userData: _user);
                         }
                         setState(() {
                           isCreatingUser = false;
                         });
-                        if (_userController.user.isEmployer == false) {
-                          Get.offAndToNamed(RoutesClass.layoutPageRoute);
-                        } else if (_userController.user.isEmployer == true) {
-                          Get.offAndToNamed(RoutesClass.jobListingPageRoute);
-                        }
+                        Get.offAndToNamed(RoutesClass.layoutPageRoute);
                       },
                       style: ButtonStyle(
                           minimumSize:

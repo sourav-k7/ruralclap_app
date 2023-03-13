@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
-import 'package:ruralclap_app/pages/service_provider_profile_page.dart';
+import 'package:ruralclap_app/pages/user_profile_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 
 class BottomNav extends StatefulWidget {
@@ -18,12 +18,12 @@ class _BottomNavState extends State<BottomNav> {
   static final UserController _userController = Get.find<UserController>();
   static final serviceProviderPages = <Widget>[
     JobListing(),
-    const AppliedJobs(),
-    const ProfilePage(),
+    AppliedJobs(),
+    ProfilePage(),
   ];
   static final employerPages = <Widget>[
-    const AppliedJobs(),
-    const ProfilePage(),
+    AppliedJobs(),
+    ProfilePage(),
   ];
   static final List<Widget> _widgetOptions =
       _userController.user.isEmployer == true

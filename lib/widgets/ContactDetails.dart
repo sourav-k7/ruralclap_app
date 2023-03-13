@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
 
 class ContactDetails extends StatelessWidget {
-  const ContactDetails({
+  final UserController _userController = Get.find<UserController>();
+  ContactDetails({
     super.key,
   });
 
@@ -16,47 +19,51 @@ class ContactDetails extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                children: const [
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(),
-                      onPressed: null,
-                      icon: FaIcon(
-                        FontAwesomeIcons.suitcase,
-                        color: ColorConstant.textPrimaryBlack,
-                      )),
-                  SizedBox(
-                    width: 10,
+                children: [
+                  Row(
+                    children: [
+                      const IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(),
+                          onPressed: null,
+                          icon: FaIcon(
+                            FontAwesomeIcons.locationDot,
+                            color: ColorConstant.textPrimaryBlack,
+                          )),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        _userController.user.location!,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 1.5,
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
-                    'Fresher',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 1.5,
-                    ),
-                  )
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
               Row(
-                children: const [
-                  IconButton(
+                children: [
+                  const IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       onPressed: null,
                       icon: FaIcon(
-                        FontAwesomeIcons.locationDot,
+                        FontAwesomeIcons.speakap,
                         color: ColorConstant.textPrimaryBlack,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    'Pune, India',
-                    style: TextStyle(
+                    _userController.user.language!,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       letterSpacing: 1.5,
@@ -81,7 +88,7 @@ class ContactDetails extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Can Join Immediately',
+                    'Can Work Immediately',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -94,8 +101,8 @@ class ContactDetails extends StatelessWidget {
                 height: 10,
               ),
               Row(
-                children: const [
-                  IconButton(
+                children: [
+                  const IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       onPressed: null,
@@ -103,12 +110,12 @@ class ContactDetails extends StatelessWidget {
                         FontAwesomeIcons.envelope,
                         color: ColorConstant.textPrimaryBlack,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    'utkarshsharma@gmail.com',
-                    style: TextStyle(
+                    _userController.user.email!,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       letterSpacing: 1.5,
@@ -120,8 +127,8 @@ class ContactDetails extends StatelessWidget {
                 height: 10,
               ),
               Row(
-                children: const [
-                  IconButton(
+                children: [
+                  const IconButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       onPressed: null,
@@ -129,12 +136,12 @@ class ContactDetails extends StatelessWidget {
                         FontAwesomeIcons.phone,
                         color: ColorConstant.textPrimaryBlack,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    '7004114774',
-                    style: TextStyle(
+                    _userController.user.phone!.toString(),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       letterSpacing: 1.5,

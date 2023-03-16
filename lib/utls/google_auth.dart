@@ -1,5 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
 
 class GoogleAuth {
   static Future<String?> signInWithGoogle() async {
@@ -20,5 +22,16 @@ class GoogleAuth {
     return null;
   }
 
-  //todo: logout function
+  static Future<void> signOutGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final UserController _userController = Get.find<UserController>();
+    try {
+      await googleSignIn.signOut();
+      _userController.clearUserData();
+      print(_userController.user.email);
+      print("User signed out of Google account");
+    } catch (error) {
+      print("Error signing out of Google account: $error");
+    }
+  }
 }

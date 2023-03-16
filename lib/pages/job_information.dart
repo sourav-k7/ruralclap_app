@@ -11,7 +11,7 @@ class job_information extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           "Jobs",
           style: TextStyle(
             color: Colors.black,

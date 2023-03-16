@@ -25,6 +25,22 @@ class UserController extends GetxController {
     }
   }
 
+  clearUserData() {
+    _user.value.id = null;
+    _user.value.name = null;
+    _user.value.description = null;
+    _user.value.skills = null;
+    _user.value.email = null;
+    _user.value.phone = null;
+    _user.value.rating = null;
+    _user.value.location = null;
+    _user.value.age = null;
+    _user.value.language = null;
+    _user.value.gender = null;
+    _user.value.expectedPayment = null;
+    _user.value.isEmployer = null;
+  }
+
   Future<void> createUser({required User userData}) async {
     const storage = FlutterSecureStorage();
     var accessToken = await storage.read(key: 'accessToken');

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:ruralclap_app/models/job.dart';
+import 'package:ruralclap_app/models/user.dart';
+import 'package:ruralclap_app/controllers/job.dart';
+import '../widgets/errorSnackBar.dart';
 
 class CreateJobPage extends StatefulWidget {
   const CreateJobPage({super.key});
@@ -10,8 +14,11 @@ class CreateJobPage extends StatefulWidget {
 }
 
 class _CreateJobPageState extends State<CreateJobPage> {
+  final Job _job = Job();
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
+  final JobController _jobController = Get.find<JobController>();
+  final User _user = User();
 
   @override
   void initState() {
@@ -21,6 +28,13 @@ class _CreateJobPageState extends State<CreateJobPage> {
       print("From Create Job page");
       print(_userController.user.id);
     }
+    if (_userController.user.id != null) {
+      _jobController.job.employer = _userController.user.id;
+      _job.employer = _userController.user.id;
+    }
+
+    _jobController.job.status = "Hiring";
+    _job.status = "Hiring";
   }
 
   @override
@@ -55,47 +69,158 @@ class _CreateJobPageState extends State<CreateJobPage> {
                   height: 10,
                 ),
                 const Text('Job Title'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.title = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a job title';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Job Type'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.type = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a job type';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Company'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.company = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a company name';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Location'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.location = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter location';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Duration'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.duration = int.parse(value);
+                    });
+                  },
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter valid duration';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Total Pay'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.pay = int.parse(value);
+                    });
+                  },
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter valid duration';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Required Skills'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.requiredSkills = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your skills';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text('Description'),
-                TextFormField(),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      _job.description = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter valid duration';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 40,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print("okayy");
+                    print(_user.id);
+                    if (_formKey.currentState!.validate()) {
+                      final job = Job();
+                      print(_userController.user.id);
+                      print(_jobController.job.employer);
+                      print("okay");
+                      print(_job.employer);
+                      _jobController.submitJob(jobData: _job);
+                    } else {
+                      errorSnackBar(content: 'Please enter valid data');
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),

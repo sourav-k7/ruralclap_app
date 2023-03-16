@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ruralclap_app/controllers/user.dart';
+import 'package:get/get.dart';
 
 class CreateJobPage extends StatefulWidget {
   const CreateJobPage({super.key});
@@ -9,6 +11,17 @@ class CreateJobPage extends StatefulWidget {
 
 class _CreateJobPageState extends State<CreateJobPage> {
   final _formKey = GlobalKey<FormState>();
+  final UserController _userController = Get.find<UserController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (_userController.user.email != null) {
+      print("From Create Job page");
+      print(_userController.user.id);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

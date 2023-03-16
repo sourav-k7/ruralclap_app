@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/pages/login_page.dart';
+import 'package:ruralclap_app/utls/google_auth.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 import 'package:ruralclap_app/widgets/ContactDetails.dart';
 import 'package:ruralclap_app/widgets/PastExperience.dart';
@@ -37,9 +39,19 @@ class _ProfilePage extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      IconButton(
+                          onPressed: () {
+                            GoogleAuth.signOutGoogle();
+                            Get.offAndToNamed(RoutesClass.loginPageRoute);
+                          },
+                          icon: FaIcon(
+                            FontAwesomeIcons.outdent,
+                            color: Colors.black,
+                            size: 20,
+                          )),
                       Row(
                         children: [
                           IconButton(
@@ -99,7 +111,7 @@ class _ProfilePage extends State<ProfilePage> {
                           ),
                           Text(
                             textAlign: TextAlign.center,
-                            'Ded Sau Rupya lega',
+                            'Something about me',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w500,
@@ -206,7 +218,7 @@ class _ProfilePage extends State<ProfilePage> {
                                   SizedBox(height: 5),
                                   Text(
                                     textAlign: TextAlign.justify,
-                                    _userController.user.description!,
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.grey,

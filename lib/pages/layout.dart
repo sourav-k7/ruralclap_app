@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
+import 'package:ruralclap_app/pages/home_page.dart';
 import 'package:ruralclap_app/pages/user_profile_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 
@@ -19,11 +20,13 @@ class _BottomNavState extends State<BottomNav> {
   static final serviceProviderPages = <Widget>[
     JobListing(),
     AppliedJobs(),
+    const MyHomePage(),
     ProfilePage(),
   ];
   static final employerPages = <Widget>[
     AppliedJobs(),
     ProfilePage(),
+    const MyHomePage(),
   ];
   static final List<Widget> _widgetOptions =
       _userController.user.isEmployer == true
@@ -65,6 +68,10 @@ class _BottomNavState extends State<BottomNav> {
     BottomNavigationBarItem(
       icon: Icon(Icons.account_circle_rounded),
       label: 'Profile',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
     ),
   ];
 

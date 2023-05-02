@@ -16,6 +16,8 @@ class UserController extends GetxController {
     if (accessToken != null) {
       storage.write(key: 'accessToken', value: accessToken);
       var res = await AuthServices.verifyTokenService(accessToken: accessToken);
+      print(res);
+
       if (!res['isNewUser']) {
         _user.value = User.fromJson(res["userData"]);
       } else if (res['isNewUser']) {

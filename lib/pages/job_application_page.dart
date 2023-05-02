@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruralclap_app/widgets/search_bar.dart';
 import 'package:ruralclap_app/widgets/job_card.dart';
-import 'package:ruralclap_app/widgets/bottom_navbar.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 
 class JobApplication extends StatefulWidget {

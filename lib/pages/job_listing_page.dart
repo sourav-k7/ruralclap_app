@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import '/widgets/search_bar.dart';
 import '/widgets/job_card.dart';
 
@@ -30,7 +33,8 @@ class _JobListingState extends State<JobListing> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SearchBar(),
+            // SearchBar(),
+
             const SizedBox(height: 15.0),
             //apply padding to some sides only
             const Text(

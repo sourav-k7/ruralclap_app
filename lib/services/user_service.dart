@@ -23,4 +23,17 @@ class UserServices {
       // throw (error);
     }
   }
+
+  static Future<dynamic> getServiceProviderReco(
+      {required String language,
+      required String location,
+      required String category}) async {
+    var response = await http.get(Uri.parse(
+        '${ApiRoutes.serviceProviderReco}?language=$language&location=$location&category=$category'));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      print('Some error occured in service provider reco');
+    }
+  }
 }

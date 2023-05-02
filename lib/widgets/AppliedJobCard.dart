@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/classes.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:intl/intl.dart';
 import 'package:ruralclap_app/pages/job_information.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 class AppliedJobCard extends StatelessWidget {
   final Job job;
@@ -12,12 +14,7 @@ class AppliedJobCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<Widget>(builder: (BuildContext context) {
-            return job_information();
-          }),
-        );
+        Get.toNamed(RoutesClass.jobInformationPageRoute);
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),

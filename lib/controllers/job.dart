@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/api_routes.dart';
 import 'package:ruralclap_app/models/job.dart';
+import 'package:ruralclap_app/services/job_service.dart';
 import '../widgets/errorSnackBar.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,16 +16,27 @@ class JobController extends GetxController {
   };
 
   Future<void> submitJob({required Job jobData}) async {
-    print("Submitting Form");
-    var response = await http.post(
-      Uri.parse(ApiRoutes.createJobApi),
-      headers: {...headers},
-      body: jsonEncode(jobData),
-    );
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      print(response.body.toString());
+    const storage = FlutterSecureStorage();
+    var accessToken = await storage.read(key: 'accessToken');
+    if (accessToken != null) {
+      var res = await JobServices.createJobService(
+          accessToken: accessToken, jobData: jobData);
+      if (res != 'Error400') {
+        _job.value = Job.fromJson(res);
+      }
+    }
+  }
+
+  Future<void> listEmployerJobs({required int? employerId}) async {
+    const storage = FlutterSecureStorage();
+    var accessToken = await storage.read(key: 'accessToken');
+    if (accessToken != null) {
+      var res = await JobServices.listEmployerJobsService(
+          accessToken: accessToken, employerId: employerId);
+      if (res != 'Error400') {
+        print("From List Employer Jobs controller");
+        print(res['jobData']);
+      }
     }
   }
 }

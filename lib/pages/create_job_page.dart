@@ -4,7 +4,9 @@ import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/controllers/job.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 import '../widgets/errorSnackBar.dart';
+import 'package:ruralclap_app/constant/theme_color.dart';
 
 class CreateJobPage extends StatefulWidget {
   const CreateJobPage({super.key});
@@ -17,7 +19,8 @@ class _CreateJobPageState extends State<CreateJobPage> {
   final Job _job = Job();
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
-  final JobController _jobController = Get.find<JobController>();
+  final _jobController = JobController();
+
   final User _user = User();
 
   @override
@@ -25,15 +28,8 @@ class _CreateJobPageState extends State<CreateJobPage> {
     super.initState();
 
     if (_userController.user.email != null) {
-      print("From Create Job page");
-      print(_userController.user.id);
-    }
-    if (_userController.user.id != null) {
-      _jobController.job.employer = _userController.user.id;
       _job.employer = _userController.user.id;
     }
-
-    _jobController.job.status = "Hiring";
     _job.status = "Hiring";
   }
 
@@ -42,10 +38,14 @@ class _CreateJobPageState extends State<CreateJobPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
+            onPressed: () => Get.back(), icon: const Icon(Icons.arrow_back)),
+        title: const Text(
+          'Create Job',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -58,18 +58,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  'Create Job',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text('Job Title'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Job Title",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.title = value;
@@ -85,8 +102,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Job Type'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Job Type",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.type = value;
@@ -102,8 +146,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Company'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Company",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.company = value;
@@ -119,8 +190,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Location'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Location",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.location = value;
@@ -136,8 +234,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Duration'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Duration",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.duration = int.parse(value);
@@ -154,8 +279,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Total Pay'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Total Pay",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.pay = int.parse(value);
@@ -172,8 +324,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Required Skills'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Required Skills",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.requiredSkills = value;
@@ -189,8 +368,35 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text('Description'),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.lightBackgroundColor,
+                          width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: ColorConstant.primaryColor, width: 1.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: ColorConstant.error, width: 1.5),
+                    ),
+                    labelText: "Description",
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                      color: ColorConstant.textPrimaryBlack,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    focusColor: ColorConstant.lightBackgroundColor,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       _job.description = value;
@@ -207,24 +413,18 @@ class _CreateJobPageState extends State<CreateJobPage> {
                   height: 40,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    print("okayy");
-                    print(_user.id);
+                  onPressed: () async {
+                    // print("okayy");
+                    // print(_user.id);
                     if (_formKey.currentState!.validate()) {
-                      final job = Job();
-                      print(_userController.user.id);
-                      print(_jobController.job.employer);
-                      print("okay");
-                      print(_job.employer);
-                      _jobController.submitJob(jobData: _job);
-                    } else {
-                      errorSnackBar(content: 'Please enter valid data');
+                      await _jobController.submitJob(jobData: _job);
                     }
+                    Get.back();
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),
-                  child: const Text('Post Job'),
+                  child: const Text('Create new Job'),
                 ),
                 const SizedBox(
                   height: 20,

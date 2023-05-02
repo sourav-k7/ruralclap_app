@@ -9,11 +9,11 @@ class AuthServices {
 
   static Future<dynamic> verifyTokenService(
       {required String accessToken}) async {
-    print(ApiRoutes.loginApi);
     var response = await http.post(
       Uri.parse(ApiRoutes.loginApi),
       headers: {...headers, 'Authorization': 'Bearer $accessToken'},
     );
+    // print(response.statusCode);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {

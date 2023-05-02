@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
+import 'package:ruralclap_app/pages/job_information.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/layout.dart';
 import 'package:ruralclap_app/pages/login_page.dart';
@@ -12,6 +13,7 @@ class RoutesClass {
   static String layoutPageRoute = '/layout';
   static String onboardingPage = '/onboarding';
   static String jobListingPageRoute = '/job-listing-page';
+  static String jobInformationPageRoute = '/job-info-page';
 
   static List<GetPage> routes = [
     // GetPage(name: nav, page: () => LayoutPage()),
@@ -20,5 +22,6 @@ class RoutesClass {
     GetPage(name: layoutPageRoute, page: () => const BottomNav()),
     GetPage(name: onboardingPage, page: () => const OnboardingPage()),
     GetPage(name: jobListingPageRoute, page: () => JobListing()),
+    GetPage(name: jobInformationPageRoute, page: () => job_information())
   ];
 }

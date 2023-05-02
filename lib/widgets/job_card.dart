@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ruralclap_app/pages/job_information.dart';
+import 'package:ruralclap_app/utls/routes.dart';
 
 class JobCard extends StatelessWidget {
   const JobCard({super.key});
@@ -12,9 +14,6 @@ class JobCard extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
           child: Hero(
             tag: 'ListTile-Hero',
             // Wrap the ListTile in a Material widget so the ListTile has someplace
@@ -26,12 +25,7 @@ class JobCard extends StatelessWidget {
                 subtitle: Text('Company \t rating \nLocation'),
                 isThreeLine: true,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<Widget>(builder: (BuildContext context) {
-                      return job_information();
-                    }),
-                  );
+                  Get.toNamed(RoutesClass.jobInformationPageRoute);
                 },
               ),
             ),

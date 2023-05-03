@@ -8,4 +8,7 @@ class ApiRoutes {
   static String createUserApi = '$url/users/create/';
   static String createJobApi = '$url/jobs/create/';
   static String listEmployerJobsApi = '$url/jobs/list-employer/';
+
+  //Service provider api
+  static String serviceProviderReco = '$url/users/service-provider/reco';
 }

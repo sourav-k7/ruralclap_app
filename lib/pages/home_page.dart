@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ServiceProviderListPage()),
+                      builder: (context) => ServiceProviderListPage()),
                 );
               },
               child: const Text('Hire service provider page'),

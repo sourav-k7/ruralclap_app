@@ -7,7 +7,7 @@ class User {
   String? skills;
   String? email;
   int? phone;
-  int? rating;
+  double? rating;
   String? location;
   int? age;
   String? language;
@@ -17,6 +17,7 @@ class User {
   String? category;
   String? education;
   int? experience;
+  double? modelRating;
 
   User({
     this.id,
@@ -35,6 +36,7 @@ class User {
     this.category,
     this.education,
     this.experience,
+    this.modelRating,
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class User {
     category = json['category'];
     education = json['education'];
     experience = json['experience'];
+    modelRating = json['modelRating'];
   }
 
   Map<String, dynamic> toJson() {
@@ -74,6 +77,7 @@ class User {
     data['category'] = category;
     data['education'] = education;
     data['experience'] = experience;
+    data['modelRating'] = modelRating;
     return data;
   }
 }

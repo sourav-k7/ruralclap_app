@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/services/auth_service.dart';
@@ -10,14 +12,13 @@ class UserController extends GetxController {
   final storage = const FlutterSecureStorage();
   final Rx<User> _user = User().obs;
   User get user => _user.value;
+  RxList<User> recoServiceProvider = <User>[].obs;
+
   Future<void> login() async {
     String? accessToken = await GoogleAuth.signInWithGoogle();
-    print(accessToken);
     if (accessToken != null) {
       storage.write(key: 'accessToken', value: accessToken);
       var res = await AuthServices.verifyTokenService(accessToken: accessToken);
-      print(res);
-
       if (!res['isNewUser']) {
         _user.value = User.fromJson(res["userData"]);
       } else if (res['isNewUser']) {
@@ -55,6 +56,26 @@ class UserController extends GetxController {
         print(res.toString());
         _user.value = User.fromJson(res);
       }
+    }
+  }
+
+  Future<void> getServiceProviderReco(
+      {required String language,
+      required String location,
+      required String category}) async {
+    try {
+      var res = await UserServices.getServiceProviderReco(
+          language: language, location: location, category: category);
+      res['data'] = jsonDecode(res['data']);
+      List<User> recoList = [];
+      res['data'].forEach((provider) {
+        recoList.add(User.fromJson(provider['fields']));
+      });
+      recoServiceProvider.value = recoList;
+      recoServiceProvider.refresh();
+    } catch (e) {
+      print(e);
+      print('some error in service provider reco');
     }
   }
 }

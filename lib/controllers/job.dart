@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
-import 'package:ruralclap_app/constant/api_routes.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/services/job_service.dart';
-import '../widgets/errorSnackBar.dart';
-import 'package:http/http.dart' as http;
 
 class JobController extends GetxController {
   final Rx<Job> _job = Job().obs;

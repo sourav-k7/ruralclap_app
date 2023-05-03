@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/services/job_service.dart';
@@ -6,6 +7,7 @@ import 'package:ruralclap_app/services/job_service.dart';
 class JobController extends GetxController {
   final Rx<Job> _job = Job().obs;
   Job get job => _job.value;
+  final UserController _userController = Get.find<UserController>();
 
   static Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -31,7 +33,11 @@ class JobController extends GetxController {
           accessToken: accessToken, employerId: employerId);
       if (res != 'Error400') {
         print("From List Employer Jobs controller");
-        print(res['jobData']);
+        if (_userController.user.isEmployer!) {
+          print(res['jobData']);
+        } else {
+          print(res['userData']);
+        }
       }
     }
   }

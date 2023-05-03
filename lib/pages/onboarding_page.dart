@@ -646,6 +646,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           isCreatingUser = true;
                         });
                         if (_formKey.currentState!.validate()) {
+                          print("User data from the frontend");
+                          print(_user.toString());
                           await _userController.createUser(userData: _user);
                         }
                         setState(() {

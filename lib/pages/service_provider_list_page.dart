@@ -1,7 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 
 class EmpDetail {
   String name;
@@ -16,25 +16,47 @@ class EmpDetail {
   });
 }
 
-class ServiceProviderListPage extends StatelessWidget {
-  const ServiceProviderListPage({super.key});
+class ServiceProviderListPage extends StatefulWidget {
+  ServiceProviderListPage({super.key});
+
+  @override
+  State<ServiceProviderListPage> createState() =>
+      _ServiceProviderListPageState();
+}
+
+class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
+  final UserController _userController = Get.find<UserController>();
+  bool isLoading = false;
+  static const jobCategory = [
+    'Beautician',
+    'Chef',
+    'Data Entry',
+    'Delivery',
+    'Driver',
+    'Nurse',
+    'Electrician',
+    'HouseKeeping',
+    'Guard'
+  ];
+  var selectedCategory = 'Beautician';
+
+  @override
+  void initState() {
+    super.initState();
+    _userController.getServiceProviderReco(
+      language: _userController.user.language ?? 'Hindi',
+      location: _userController.user.location ?? "Pune",
+      category: selectedCategory,
+    );
+  }
+
+  // List<Widget> recoCard() {
+
+  //   return
+  // }
 
   @override
   Widget build(BuildContext context) {
-    var serviceProviderList = [
-      EmpDetail(
-        name: 'Username',
-        jobTitle: 'Flutter developer',
-        rating: 5.0,
-        description: 'Small Job Description',
-      ),
-      EmpDetail(
-        name: 'Username 2',
-        jobTitle: 'Flutter developer',
-        rating: 5.0,
-        description: 'Small Job Description',
-      ),
-    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -56,6 +78,7 @@ class ServiceProviderListPage extends StatelessWidget {
             const Text(
               'Hire Service Provider',
               style: TextStyle(
+                color: ColorConstant.textPrimaryBlack,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
@@ -63,11 +86,65 @@ class ServiceProviderListPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ...serviceProviderList
-                .map((emp) => ServiceProviderCard(
-                      detail: emp,
-                    ))
-                .toList()
+            DropdownButtonFormField(
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+                color: ColorConstant.primaryColor,
+              ),
+              style: const TextStyle(
+                fontSize: 16,
+                color: ColorConstant.textBody,
+              ),
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: const EdgeInsets.all(10),
+                filled: true,
+                hintText: 'Select your job category',
+                hintStyle: const TextStyle(
+                  fontSize: 16,
+                  color: ColorConstant.textBody,
+                ),
+                fillColor: ColorConstant.lightBackgroundColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              onChanged: (String? value) async {
+                selectedCategory = value ?? '';
+                setState(() {
+                  isLoading = true;
+                });
+                await _userController.getServiceProviderReco(
+                  language: _userController.user.language ?? 'Hindi',
+                  location: _userController.user.location ?? "Pune",
+                  category: value ?? '',
+                );
+                setState(() {
+                  isLoading = false;
+                });
+              },
+              items: jobCategory.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            isLoading
+                ? const CircularProgressIndicator()
+                : Column(
+                    children: _userController.recoServiceProvider
+                        .map((user) => ServiceProviderCard(
+                              name: user.name!,
+                              jobTitle: user.category!,
+                              description: user.description!,
+                              rating: user.rating!,
+                            ))
+                        .toList())
           ],
         ),
       ),
@@ -76,9 +153,15 @@ class ServiceProviderListPage extends StatelessWidget {
 }
 
 class ServiceProviderCard extends StatelessWidget {
-  const ServiceProviderCard({super.key, required this.detail});
+  const ServiceProviderCard(
+      {super.key,
+      required this.name,
+      required this.jobTitle,
+      required this.description,
+      required this.rating});
 
-  final EmpDetail detail;
+  final String name, jobTitle, description;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -115,23 +198,23 @@ class ServiceProviderCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                detail.name,
+                name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
               Text(
-                detail.jobTitle,
+                jobTitle,
                 style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
               Text(
-                'Rating: ${detail.rating}',
+                'Rating: $rating',
               ),
               Text(
-                detail.description,
+                description,
                 style: const TextStyle(
                   fontSize: 16,
                 ),

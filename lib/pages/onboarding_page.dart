@@ -563,7 +563,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 return error;
                               },
                               onChanged: (value) {
-                                _user.experience = value;
+                                _user.experience = int.parse(value);
                               },
                               decoration: const InputDecoration(
                                 filled: true,

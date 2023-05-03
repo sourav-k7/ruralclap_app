@@ -4,8 +4,6 @@ import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/controllers/job.dart';
-import 'package:ruralclap_app/utls/routes.dart';
-import '../widgets/errorSnackBar.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 
 class CreateJobPage extends StatefulWidget {
@@ -20,8 +18,6 @@ class _CreateJobPageState extends State<CreateJobPage> {
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
   final _jobController = JobController();
-
-  final User _user = User();
 
   @override
   void initState() {

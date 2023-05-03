@@ -81,10 +81,7 @@ class _BottomNavState extends State<BottomNav> {
     ),
   ];
 
-  static final List<BottomNavigationBarItem> navBarItem =
-      _userController.user.isEmployer == true
-          ? employerNavItems
-          : serviveProviderNavItems;
+  // static final List<BottomNavigationBarItem> navBarItem =
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +94,9 @@ class _BottomNavState extends State<BottomNav> {
         backgroundColor: Colors.white,
         selectedItemColor: ColorConstant.primaryColor,
         unselectedItemColor: Colors.grey,
-        items: navBarItem,
+        items: _userController.user.isEmployer == true
+            ? employerNavItems
+            : serviveProviderNavItems,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),

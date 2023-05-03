@@ -563,7 +563,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 return error;
                               },
                               onChanged: (value) {
-                                _user.experience = value;
+                                _user.experience = int.parse(value);
                               },
                               decoration: const InputDecoration(
                                 filled: true,
@@ -646,6 +646,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           isCreatingUser = true;
                         });
                         if (_formKey.currentState!.validate()) {
+                          print("User data from the frontend");
+                          print(_user.toString());
                           await _userController.createUser(userData: _user);
                         }
                         setState(() {

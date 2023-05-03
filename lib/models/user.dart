@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class User {
   int? id;
   String? name;
@@ -14,7 +16,7 @@ class User {
   bool? isEmployer;
   String? category;
   String? education;
-  String? experience;
+  int? experience;
 
   User({
     this.id,

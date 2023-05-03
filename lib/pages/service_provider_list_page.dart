@@ -110,12 +110,12 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              onChanged: (String? value) {
+              onChanged: (String? value) async {
                 selectedCategory = value ?? '';
                 setState(() {
                   isLoading = true;
                 });
-                _userController.getServiceProviderReco(
+                await _userController.getServiceProviderReco(
                   language: _userController.user.language ?? 'Hindi',
                   location: _userController.user.location ?? "Pune",
                   category: value ?? '',

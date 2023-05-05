@@ -18,7 +18,6 @@ class _CreateJobPageState extends State<CreateJobPage> {
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
   final _jobController = JobController();
-  String selectedCategory = 'Beautician';
   @override
   void initState() {
     super.initState();
@@ -79,7 +78,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
                     ),
                   ),
                   onChanged: (String? value) async {
-                    selectedCategory = value ?? '';
+                    _job.category = value ?? '';
                   },
                   items: jobCategory.map((String items) {
                     return DropdownMenuItem(
@@ -305,7 +304,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      await _jobController.submitJob(jobData: _job);
+                      await _jobController.createJob(jobData: _job);
                     }
                     Get.back();
                   },

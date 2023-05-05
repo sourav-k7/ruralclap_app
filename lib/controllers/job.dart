@@ -13,12 +13,13 @@ class JobController extends GetxController {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  Future<void> submitJob({required Job jobData}) async {
+  Future<void> createJob({required Job jobData}) async {
     const storage = FlutterSecureStorage();
     var accessToken = await storage.read(key: 'accessToken');
     if (accessToken != null) {
       var res = await JobServices.createJobService(
           accessToken: accessToken, jobData: jobData);
+      print(res);
       if (res != 'Error400') {
         _job.value = Job.fromJson(res);
       }

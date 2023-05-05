@@ -8,7 +8,7 @@ class Job {
   String? status;
   int? employer;
   int? serviceProvider;
-  int? category;
+  String? category;
 
   Job(
       {this.id,

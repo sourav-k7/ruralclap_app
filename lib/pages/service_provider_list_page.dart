@@ -124,10 +124,10 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
                 : Column(
                     children: _userController.recoServiceProvider
                         .map((user) => ServiceProviderCard(
-                              name: user.name!,
-                              jobTitle: user.category!,
-                              description: user.description!,
-                              rating: user.rating!,
+                              name: user.name ?? '',
+                              jobTitle: user.category ?? '',
+                              description: user.description ?? '',
+                              rating: user.rating ?? 0,
                             ))
                         .toList())
           ],

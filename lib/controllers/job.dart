@@ -43,7 +43,6 @@ class JobController extends GetxController {
       var res = await JobServices.getJobList(
           accessToken: accessToken,
           category: _userController.user.category ?? '');
-      print(res);
       List<Job> resJobList = [];
       res.forEach((jsonJob) {
         resJobList.add(Job.fromJson(jsonJob));

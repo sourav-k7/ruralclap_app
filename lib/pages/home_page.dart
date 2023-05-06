@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => JobApplication()),
+                  MaterialPageRoute(builder: (context) => JobDetailPage()),
                 );
               },
               child: const Text('Job Application page'),

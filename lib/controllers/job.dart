@@ -26,14 +26,13 @@ class JobController extends GetxController {
   }
 
   Future<void> listEmployerJobs({required int? employerId}) async {
-    String accessToken = await getAccessToken();
-    var res = await JobServices.listEmployerJobsService(
-        accessToken: accessToken, employerId: employerId);
-    if (res != 'Error400') {
-      if (_userController.user.isEmployer!) {
-      } else {
-        print(res['userData']);
-      }
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.listEmployerJobsService(
+          accessToken: accessToken, employerId: employerId);
+      print(res);
+    } catch (e) {
+      print(e);
     }
   }
 

@@ -35,7 +35,7 @@ class JobServices {
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);
     } else {
-      return "Error400";
+      throw Exception('Some error occurred while fetching create job data');
     }
   }
 

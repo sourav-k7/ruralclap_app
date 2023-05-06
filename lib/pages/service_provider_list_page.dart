@@ -119,17 +119,19 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
             const SizedBox(
               height: 20,
             ),
-            isLoading
-                ? const CircularProgressIndicator()
-                : Column(
-                    children: _userController.recoServiceProvider
-                        .map((user) => ServiceProviderCard(
-                              name: user.name ?? '',
-                              jobTitle: user.category ?? '',
-                              description: user.description ?? '',
-                              rating: user.rating ?? 0,
-                            ))
-                        .toList())
+            Obx(
+              () => isLoading
+                  ? const CircularProgressIndicator()
+                  : Column(
+                      children: _userController.recoServiceProvider
+                          .map((user) => ServiceProviderCard(
+                                name: user.name ?? '',
+                                jobTitle: user.category ?? '',
+                                description: user.description ?? '',
+                                rating: user.rating ?? 0,
+                              ))
+                          .toList()),
+            ),
           ],
         ),
       ),

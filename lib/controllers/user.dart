@@ -14,6 +14,12 @@ class UserController extends GetxController {
   User get user => _user.value;
   RxList<User> recoServiceProvider = <User>[].obs;
 
+  Future<String> getAccessToken() async {
+    const storage = FlutterSecureStorage();
+    var accessToken = await storage.read(key: 'accessToken');
+    return accessToken ?? '';
+  }
+
   Future<void> login() async {
     String? accessToken = await GoogleAuth.signInWithGoogle();
     if (accessToken != null) {
@@ -52,8 +58,6 @@ class UserController extends GetxController {
       var res = await UserServices.createUserService(
           accessToken: accessToken, userData: userData);
       if (res != 'Error400') {
-        print("from user controller this is res");
-        print(res.toString());
         _user.value = User.fromJson(res);
       }
     }

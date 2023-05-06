@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/home_page.dart';
@@ -12,28 +13,25 @@ class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
   @override
-  _BottomNavState createState() => _BottomNavState();
+  State<BottomNav> createState() => _BottomNavState();
 }
 
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
   static final UserController _userController = Get.find<UserController>();
-  static final serviceProviderPages = <Widget>[
+  final JobController _jobController = Get.put(JobController());
+  final serviceProviderPages = <Widget>[
     JobListing(),
     AppliedJobs(),
     const MyHomePage(),
     ProfilePage(),
   ];
-  static final employerPages = <Widget>[
+  final employerPages = <Widget>[
     ServiceProviderListPage(),
     AppliedJobs(),
     ProfilePage(),
     const MyHomePage(),
   ];
-  static final List<Widget> _widgetOptions =
-      _userController.user.isEmployer == true
-          ? employerPages
-          : serviceProviderPages;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -85,9 +83,12 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> widgetOptions = _userController.user.isEmployer == true
+        ? employerPages
+        : serviceProviderPages;
     return Scaffold(
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -8,38 +8,50 @@ class JobController extends GetxController {
   final Rx<Job> _job = Job().obs;
   Job get job => _job.value;
   final UserController _userController = Get.find<UserController>();
+  RxList<Job> categoryJobList = <Job>[].obs;
 
-  static Map<String, String> headers = {
-    'Content-Type': 'application/json; charset=UTF-8',
-  };
-
-  Future<void> createJob({required Job jobData}) async {
+  Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
     var accessToken = await storage.read(key: 'accessToken');
-    if (accessToken != null) {
-      var res = await JobServices.createJobService(
-          accessToken: accessToken, jobData: jobData);
-      print(res);
-      if (res != 'Error400') {
-        _job.value = Job.fromJson(res);
-      }
+    return accessToken ?? '';
+  }
+
+  Future<void> createJob({required Job jobData}) async {
+    String accessToken = await getAccessToken();
+    var res = await JobServices.createJobService(
+        accessToken: accessToken, jobData: jobData);
+    if (res != 'Error400') {
+      _job.value = Job.fromJson(res);
     }
   }
 
   Future<void> listEmployerJobs({required int? employerId}) async {
-    const storage = FlutterSecureStorage();
-    var accessToken = await storage.read(key: 'accessToken');
-    if (accessToken != null) {
-      var res = await JobServices.listEmployerJobsService(
-          accessToken: accessToken, employerId: employerId);
-      if (res != 'Error400') {
-        print("From List Employer Jobs controller");
-        if (_userController.user.isEmployer!) {
-          print(res['jobData']);
-        } else {
-          print(res['userData']);
-        }
+    String accessToken = await getAccessToken();
+    var res = await JobServices.listEmployerJobsService(
+        accessToken: accessToken, employerId: employerId);
+    if (res != 'Error400') {
+      if (_userController.user.isEmployer!) {
+      } else {
+        print(res['userData']);
       }
+    }
+  }
+
+  Future<void> getJobList() async {
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getJobList(
+          accessToken: accessToken,
+          category: _userController.user.category ?? '');
+      print(res);
+      List<Job> resJobList = [];
+      res.forEach((jsonJob) {
+        resJobList.add(Job.fromJson(jsonJob));
+      });
+      categoryJobList.value = resJobList;
+      categoryJobList.refresh();
+    } catch (e) {
+      print(e);
     }
   }
 }

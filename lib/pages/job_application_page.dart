@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/job.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
 
 class JobDetailPage extends StatefulWidget {
@@ -11,7 +13,21 @@ class JobDetailPage extends StatefulWidget {
 }
 
 class _JobDetailPageState extends State<JobDetailPage> {
-  Job _job = Get.arguments;
+  final Job _job = Get.arguments;
+  final JobController _jobController = Get.find<JobController>();
+  final UserController _userController = Get.find<UserController>();
+  bool isAppliedForJob = false;
+
+  void handleJobApplication() async {
+    var res = await _jobController.applyForJob(
+        userId: _userController.user.id!, jobId: _job.id!);
+    if (res == true) {
+      setState(() {
+        isAppliedForJob = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,22 +78,33 @@ class _JobDetailPageState extends State<JobDetailPage> {
             skills: _job.requiredSkills!,
           ),
           const SizedBox(height: 30),
-          Align(
-            alignment: Alignment.center,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ColorConstant.primaryColor,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                textStyle: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+          isAppliedForJob
+              ? const Center(
+                  child: Text(
+                  'Applied for job',
+                  style: TextStyle(
+                    color: ColorConstant.success,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ))
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorConstant.primaryColor,
+                      minimumSize: const Size.fromHeight(50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: handleJobApplication,
+                    child: const Text('Apply'),
+                  ),
                 ),
-              ),
-              child: const Text('Apply'),
-              onPressed: () {},
-            ),
-          ),
         ],
       ),
     );

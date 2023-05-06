@@ -54,4 +54,26 @@ class JobServices {
       throw Exception('Some error occurred while fetching jobs');
     }
   }
+
+  static Future<dynamic> applyJob({
+    required String accessToken,
+    required int userId,
+    required int jobId,
+  }) async {
+    var response = await http.post(
+      Uri.parse(ApiRoutes.applyJob),
+      headers: {...headers, 'Authorization': 'Bearer $accessToken'},
+      body: jsonEncode({'user_id': userId, 'job_id': jobId}),
+    );
+    if (response.statusCode.toString().contains('2')) {
+      return true;
+    } else {
+      if (jsonDecode(response.body)[0] ==
+          'This job application already exists') {
+        //todo: bottom snackbar if already applied
+        return true;
+      }
+      throw Exception('Error while applying for job');
+    }
+  }
 }

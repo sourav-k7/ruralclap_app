@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/widgets/google_login_button.dart';
 
 class LoginPage extends StatefulWidget {

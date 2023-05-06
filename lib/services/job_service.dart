@@ -38,4 +38,20 @@ class JobServices {
       return "Error400";
     }
   }
+
+  static Future<dynamic> getJobList(
+      {required String accessToken, required String category}) async {
+    var response = await http.get(
+      Uri.parse('${ApiRoutes.getJob}?category=$category'),
+      headers: {
+        ...headers,
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+    if (response.statusCode.toString().contains('2')) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Some error occurred while fetching jobs');
+    }
+  }
 }

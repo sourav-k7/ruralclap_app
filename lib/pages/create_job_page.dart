@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ruralclap_app/constant/job_category.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
-import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/controllers/job.dart';
-import 'package:ruralclap_app/utls/routes.dart';
-import '../widgets/errorSnackBar.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 
 class CreateJobPage extends StatefulWidget {
@@ -20,9 +18,6 @@ class _CreateJobPageState extends State<CreateJobPage> {
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
   final _jobController = JobController();
-
-  final User _user = User();
-
   @override
   void initState() {
     super.initState();
@@ -58,6 +53,43 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 const SizedBox(
                   height: 20,
                 ),
+                DropdownButtonFormField(
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: ColorConstant.primaryColor,
+                  ),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: ColorConstant.textPrimaryBlack,
+                  ),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: const EdgeInsets.all(10),
+                    filled: true,
+                    hintText: 'Select your job category',
+                    hintStyle: const TextStyle(
+                      fontSize: 16,
+                      color: ColorConstant.textBody,
+                    ),
+                    fillColor: ColorConstant.lightBackgroundColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  onChanged: (String? value) async {
+                    _job.category = value ?? '';
+                  },
+                  items: jobCategory.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 TextFormField(
                   decoration: const InputDecoration(
                     filled: true,
@@ -80,9 +112,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
                     ),
                     labelText: "Job Title",
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
+                      color: ColorConstant.textBody,
                     ),
                     fillColor: ColorConstant.lightBackgroundColor,
                     focusColor: ColorConstant.lightBackgroundColor,
@@ -122,99 +152,9 @@ class _CreateJobPageState extends State<CreateJobPage> {
                       borderSide:
                           BorderSide(color: ColorConstant.error, width: 1.5),
                     ),
-                    labelText: "Job Type",
-                    labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
-                    ),
-                    fillColor: ColorConstant.lightBackgroundColor,
-                    focusColor: ColorConstant.lightBackgroundColor,
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _job.type = value;
-                    });
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a job type';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.lightBackgroundColor,
-                          width: 1.5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.primaryColor, width: 1.5),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
-                    labelText: "Company",
-                    labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
-                    ),
-                    fillColor: ColorConstant.lightBackgroundColor,
-                    focusColor: ColorConstant.lightBackgroundColor,
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _job.company = value;
-                    });
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a company name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.lightBackgroundColor,
-                          width: 1.5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.primaryColor, width: 1.5),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
                     labelText: "Location",
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
+                      color: ColorConstant.textBody,
                     ),
                     fillColor: ColorConstant.lightBackgroundColor,
                     focusColor: ColorConstant.lightBackgroundColor,
@@ -254,56 +194,9 @@ class _CreateJobPageState extends State<CreateJobPage> {
                       borderSide:
                           BorderSide(color: ColorConstant.error, width: 1.5),
                     ),
-                    labelText: "Duration",
-                    labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
-                    ),
-                    fillColor: ColorConstant.lightBackgroundColor,
-                    focusColor: ColorConstant.lightBackgroundColor,
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _job.duration = int.parse(value);
-                    });
-                  },
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter valid duration';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.lightBackgroundColor,
-                          width: 1.5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: ColorConstant.primaryColor, width: 1.5),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: ColorConstant.error, width: 1.5),
-                    ),
                     labelText: "Total Pay",
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
+                      color: ColorConstant.textBody,
                     ),
                     fillColor: ColorConstant.lightBackgroundColor,
                     focusColor: ColorConstant.lightBackgroundColor,
@@ -346,9 +239,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
                     ),
                     labelText: "Required Skills",
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
+                      color: ColorConstant.textBody,
                     ),
                     fillColor: ColorConstant.lightBackgroundColor,
                     focusColor: ColorConstant.lightBackgroundColor,
@@ -390,9 +281,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
                     ),
                     labelText: "Description",
                     labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.2,
-                      color: ColorConstant.textPrimaryBlack,
+                      color: ColorConstant.textBody,
                     ),
                     fillColor: ColorConstant.lightBackgroundColor,
                     focusColor: ColorConstant.lightBackgroundColor,
@@ -414,10 +303,8 @@ class _CreateJobPageState extends State<CreateJobPage> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    // print("okayy");
-                    // print(_user.id);
                     if (_formKey.currentState!.validate()) {
-                      await _jobController.submitJob(jobData: _job);
+                      await _jobController.createJob(jobData: _job);
                     }
                     Get.back();
                   },

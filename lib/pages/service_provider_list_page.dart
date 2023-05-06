@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
+import 'package:ruralclap_app/constant/job_category.dart';
 
 class EmpDetail {
   String name;
@@ -27,17 +28,6 @@ class ServiceProviderListPage extends StatefulWidget {
 class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
   final UserController _userController = Get.find<UserController>();
   bool isLoading = false;
-  static const jobCategory = [
-    'Beautician',
-    'Chef',
-    'Data Entry',
-    'Delivery',
-    'Driver',
-    'Nurse',
-    'Electrician',
-    'HouseKeeping',
-    'Guard'
-  ];
   var selectedCategory = 'Beautician';
 
   @override
@@ -49,11 +39,6 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
       category: selectedCategory,
     );
   }
-
-  // List<Widget> recoCard() {
-
-  //   return
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -134,17 +119,19 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
             const SizedBox(
               height: 20,
             ),
-            isLoading
-                ? const CircularProgressIndicator()
-                : Column(
-                    children: _userController.recoServiceProvider
-                        .map((user) => ServiceProviderCard(
-                              name: user.name!,
-                              jobTitle: user.category!,
-                              description: user.description!,
-                              rating: user.rating!,
-                            ))
-                        .toList())
+            Obx(
+              () => isLoading
+                  ? const CircularProgressIndicator()
+                  : Column(
+                      children: _userController.recoServiceProvider
+                          .map((user) => ServiceProviderCard(
+                                name: user.name ?? '',
+                                jobTitle: user.category ?? '',
+                                description: user.description ?? '',
+                                rating: user.rating ?? 0,
+                              ))
+                          .toList()),
+            ),
           ],
         ),
       ),

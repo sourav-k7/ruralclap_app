@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/classes.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:intl/intl.dart';
-import 'package:ruralclap_app/pages/job_information.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
 class AppliedJobCard extends StatelessWidget {

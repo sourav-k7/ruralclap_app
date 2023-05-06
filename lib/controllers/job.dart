@@ -43,7 +43,6 @@ class JobController extends GetxController {
       var res = await JobServices.getJobList(
           accessToken: accessToken,
           category: _userController.user.category ?? '');
-      print(res);
       List<Job> resJobList = [];
       res.forEach((jsonJob) {
         resJobList.add(Job.fromJson(jsonJob));
@@ -52,6 +51,24 @@ class JobController extends GetxController {
       categoryJobList.refresh();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<bool> applyForJob({required int userId, required int jobId}) async {
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.applyJob(
+          accessToken: accessToken, userId: userId, jobId: jobId);
+      if (res == true) {
+        categoryJobList.value =
+            categoryJobList.where((job) => job.id != jobId).toList();
+        categoryJobList.refresh();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }

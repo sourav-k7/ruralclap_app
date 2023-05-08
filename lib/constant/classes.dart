@@ -1,16 +1,26 @@
 class Job {
   late String postName;
-  late String companyName;
-  late String companyLogo;
   late String applicationStatus;
-  late DateTime appliedDate;
+  late DateTime createdDate;
   late int numberOfApplicants;
 
   Job(
       {required this.postName,
-      required this.companyName,
-      required this.companyLogo,
       required this.applicationStatus,
-      required this.appliedDate,
+      required this.createdDate,
       required this.numberOfApplicants});
 }
+
+// class Job {
+//   late String title;
+//   late String status;
+//   late DateTime createdDate;
+//   late int applicants;
+
+//   Job({
+//     required this.title,
+//     required this.status,
+//     required this.createdDate,
+//     required this.applicants,
+//   });
+// }

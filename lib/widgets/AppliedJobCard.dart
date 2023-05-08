@@ -40,18 +40,6 @@ class AppliedJobCard extends StatelessWidget {
                           color: ColorConstant.textPrimaryBlack,
                         ),
                       ),
-                      Text(
-                        job.companyName,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 1.15,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Image(width: 40, image: NetworkImage(job.companyLogo)),
                     ],
                   ),
                 ],
@@ -110,7 +98,7 @@ class AppliedJobCard extends StatelessWidget {
                                 size: 20,
                               )),
                           Text(
-                            'Applied on ${DateFormat.yMMMd().format(job.appliedDate).toString()}',
+                            'Created on ${DateFormat.yMMMd().format(job.createdDate).toString()}',
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,

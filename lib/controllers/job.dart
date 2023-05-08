@@ -9,6 +9,7 @@ class JobController extends GetxController {
   Job get job => _job.value;
   final UserController _userController = Get.find<UserController>();
   RxList<Job> categoryJobList = <Job>[].obs;
+  RxList<Job> employerJobList = <Job>[].obs;
 
   Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
@@ -26,14 +27,19 @@ class JobController extends GetxController {
   }
 
   Future<void> listEmployerJobs({required int? employerId}) async {
-    String accessToken = await getAccessToken();
-    var res = await JobServices.listEmployerJobsService(
-        accessToken: accessToken, employerId: employerId);
-    if (res != 'Error400') {
-      if (_userController.user.isEmployer!) {
-      } else {
-        print(res['userData']);
-      }
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.listEmployerJobsService(
+          accessToken: accessToken, employerId: employerId);
+      List<Job> resJobList = [];
+      print(res);
+      res.forEach((jsonJob) {
+        resJobList.add(Job.fromJson(jsonJob['fields']));
+      });
+      employerJobList.value = resJobList;
+      employerJobList.refresh();
+    } catch (e) {
+      print(e);
     }
   }
 

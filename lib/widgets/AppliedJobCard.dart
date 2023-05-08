@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:ruralclap_app/constant/classes.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
-import 'package:intl/intl.dart';
+import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
 class AppliedJobCard extends StatelessWidget {
@@ -32,7 +31,7 @@ class AppliedJobCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        job.postName,
+                        job.title!,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
@@ -41,7 +40,7 @@ class AppliedJobCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        job.companyName,
+                        job.category ?? '',
                         style: const TextStyle(
                             fontSize: 14,
                             letterSpacing: 1.15,
@@ -49,11 +48,7 @@ class AppliedJobCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      Image(width: 40, image: NetworkImage(job.companyLogo)),
-                    ],
-                  ),
+                  const Icon(Icons.business, size: 45)
                 ],
               ),
               const SizedBox(
@@ -78,7 +73,7 @@ class AppliedJobCard extends StatelessWidget {
                       onPressed: null,
                     ),
                     Text(
-                      job.applicationStatus,
+                      job.status!,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -100,8 +95,8 @@ class AppliedJobCard extends StatelessWidget {
                   Column(
                     children: [
                       Row(
-                        children: [
-                          const IconButton(
+                        children: const [
+                          IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
                               onPressed: null,
@@ -110,8 +105,9 @@ class AppliedJobCard extends StatelessWidget {
                                 size: 20,
                               )),
                           Text(
-                            'Applied on ${DateFormat.yMMMd().format(job.appliedDate).toString()}',
-                            style: const TextStyle(
+                            'Applied on date',
+                            // ${DateFormat.yMMMd().format(job.appliedDate).toString()}',
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 1.02,
@@ -125,8 +121,8 @@ class AppliedJobCard extends StatelessWidget {
                   Column(
                     children: [
                       Row(
-                        children: [
-                          const IconButton(
+                        children: const [
+                          IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
                               onPressed: null,
@@ -134,12 +130,12 @@ class AppliedJobCard extends StatelessWidget {
                                 FontAwesomeIcons.userGroup,
                                 size: 16,
                               )),
-                          const SizedBox(
+                          SizedBox(
                             width: 5,
                           ),
                           Text(
-                            '${job.numberOfApplicants} Applicants',
-                            style: const TextStyle(
+                            '0 Applicants',
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 1.5,

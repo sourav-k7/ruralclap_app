@@ -30,43 +30,17 @@ class _EmployerJobPage extends State<EmployerJobPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _getFAB() {
-      if (_userController.user.isEmployer!) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 5, 20),
-          child: SizedBox(
-            width: 65,
-            height: 65,
-            child: FloatingActionButton(
-              mini: false,
-              onPressed: () {
-                Get.toNamed(RoutesClass.createJobPageRoute);
-              },
-              backgroundColor: ColorConstant.primaryColor,
-              child: const FaIcon(
-                FontAwesomeIcons.plus,
-                size: 30,
-              ),
-            ),
-          ),
-        );
-      } else {
-        return Container();
-      }
-    }
-
+    print(_jobController.employerJobList.length);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          _userController.user.isEmployer!
-              ? 'Jobs You Created in the Past'
-              : 'My Applied Jobs',
+        title: const Text(
+          'Jobs You Created in the Past',
           textAlign: TextAlign.center,
-          style: const TextStyle(
-              color: ColorConstant.textPrimaryBlack,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.5),
+          style: TextStyle(
+            color: ColorConstant.textPrimaryBlack,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         centerTitle: true,
         backgroundColor: ColorConstant.lightBackgroundColor,
@@ -77,19 +51,39 @@ class _EmployerJobPage extends State<EmployerJobPage> {
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Container(
             color: ColorConstant.lightBackgroundColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: []
-                  .map((job) => AppliedJobCard(
-                        job: job,
-                      ))
-                  .toList(),
+            child: Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _jobController.employerJobList.map((job) {
+                  print(job.title);
+                  return AppliedJobCard(
+                    job: job,
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ),
       ),
-      floatingActionButton: _getFAB(),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 5, 20),
+        child: SizedBox(
+          width: 65,
+          height: 65,
+          child: FloatingActionButton(
+            mini: false,
+            onPressed: () {
+              Get.toNamed(RoutesClass.createJobPageRoute);
+            },
+            backgroundColor: ColorConstant.primaryColor,
+            child: const FaIcon(
+              FontAwesomeIcons.plus,
+              size: 30,
+            ),
+          ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }

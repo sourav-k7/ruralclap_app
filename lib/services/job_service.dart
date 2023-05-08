@@ -33,7 +33,7 @@ class JobServices {
       },
     );
     if (response.statusCode.toString().contains('2')) {
-      return jsonDecode(response.body);
+      return jsonDecode(jsonDecode(response.body)['data']);
     } else {
       throw Exception('Some error occurred while fetching create job data');
     }

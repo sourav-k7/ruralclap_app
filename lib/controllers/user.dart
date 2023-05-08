@@ -22,6 +22,7 @@ class UserController extends GetxController {
 
   Future<void> login() async {
     String? accessToken = await GoogleAuth.signInWithGoogle();
+    // String? accessToken = "##neymarsk01@gmail.com";
     if (accessToken != null) {
       storage.write(key: 'accessToken', value: accessToken);
       var res = await AuthServices.verifyTokenService(accessToken: accessToken);

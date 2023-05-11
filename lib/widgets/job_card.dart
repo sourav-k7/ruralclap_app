@@ -37,8 +37,7 @@ class JobCard extends StatelessWidget {
               ),
               isThreeLine: true,
               onTap: () {
-                Get.toNamed(RoutesClass.jobInformationPageRoute,
-                    arguments: job);
+                Get.toNamed(RoutesClass.jobDetailPageRoute, arguments: job);
               },
             ),
           ),

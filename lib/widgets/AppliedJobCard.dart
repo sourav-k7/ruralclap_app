@@ -12,7 +12,7 @@ class AppliedJobCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesClass.jobInformationPageRoute, arguments: job);
+        Get.toNamed(RoutesClass.empJobDetailPage, arguments: job);
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),

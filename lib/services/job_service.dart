@@ -77,4 +77,17 @@ class JobServices {
       throw Exception('Error while applying for job');
     }
   }
+
+  static Future<dynamic> getJobApplicantService(
+      {required int? jobId, required String accessToken}) async {
+    var response = await http.get(
+      Uri.parse('${ApiRoutes.jobApplicantList}?id=$jobId'),
+      headers: {...headers, 'Authorization': 'Bearer $accessToken'},
+    );
+    if (response.statusCode.toString().contains('2')) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error while getting job details');
+    }
+  }
 }

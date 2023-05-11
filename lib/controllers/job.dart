@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/models/job.dart';
+import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/services/job_service.dart';
 
 class JobController extends GetxController {
@@ -10,6 +11,8 @@ class JobController extends GetxController {
   final UserController _userController = Get.find<UserController>();
   RxList<Job> categoryJobList = <Job>[].obs;
   RxList<Job> employerJobList = <Job>[].obs;
+  RxBool jobApplicantLoader = false.obs;
+  RxList<User> applicantList = <User>[].obs;
 
   Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
@@ -32,8 +35,8 @@ class JobController extends GetxController {
       var res = await JobServices.listEmployerJobsService(
           accessToken: accessToken, employerId: employerId);
       List<Job> resJobList = [];
-      print(res);
       res.forEach((jsonJob) {
+        jsonJob['fields']['id'] = jsonJob['pk'];
         resJobList.add(Job.fromJson(jsonJob['fields']));
       });
       employerJobList.value = resJobList;
@@ -75,6 +78,25 @@ class JobController extends GetxController {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  Future<void> getJobApplicantList({required int? jobId}) async {
+    try {
+      jobApplicantLoader.value = true;
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getJobApplicantService(
+          jobId: jobId, accessToken: accessToken);
+      List<User> resApplicantList = [];
+      res.forEach((json) {
+        resApplicantList.add(User.fromJson(json['user_id']));
+      });
+      applicantList.value = resApplicantList;
+      applicantList.refresh();
+      jobApplicantLoader.value = false;
+    } catch (e) {
+      print(e);
+      jobApplicantLoader.value = false;
     }
   }
 }

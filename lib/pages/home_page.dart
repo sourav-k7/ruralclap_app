@@ -7,7 +7,7 @@ import 'package:ruralclap_app/pages/user_profile_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 import 'package:ruralclap_app/pages/service_request_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
-import 'package:ruralclap_app/pages/emp_job_detail_page.dart';
+import 'package:ruralclap_app/pages/job_apply_page.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
 class MyHomePage extends StatefulWidget {

@@ -2,24 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/job.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
-import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 
-class EmpJobDetailPage extends StatefulWidget {
-  const EmpJobDetailPage({super.key});
+class JobDetailPage extends StatefulWidget {
+  const JobDetailPage({super.key});
 
   @override
-  State<EmpJobDetailPage> createState() => _EmpJobDetailPageState();
+  State<JobDetailPage> createState() => _JobDetailPageState();
 }
 
-class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
+class _JobDetailPageState extends State<JobDetailPage> {
   final Job _job = Get.arguments;
   final JobController _jobController = Get.find<JobController>();
+  final UserController _userController = Get.find<UserController>();
+  bool isAppliedForJob = false;
 
-  @override
-  void initState() {
-    _jobController.getJobApplicantList(jobId: _job.id);
-    super.initState();
+  void handleJobApplication() async {
+    var res = await _jobController.applyForJob(
+        userId: _userController.user.id!, jobId: _job.id!);
+    if (res == true) {
+      setState(() {
+        isAppliedForJob = true;
+      });
+    }
   }
 
   @override
@@ -34,7 +40,7 @@ class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
           },
         ),
         title: const Text(
-          "Job Detail Page",
+          "Apply for job",
           style: TextStyle(
             color: ColorConstant.textPrimaryBlack,
             fontWeight: FontWeight.bold,
@@ -71,35 +77,34 @@ class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
             expectedPay: _job.pay!.toString(),
             skills: _job.requiredSkills!,
           ),
-          const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Applicant",
-              style: TextStyle(
-                color: ColorConstant.textPrimaryBlack,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Obx(
-              () => _jobController.jobApplicantLoader.value
-                  ? const CircularProgressIndicator()
-                  : Column(
-                      children: _jobController.applicantList
-                          .map((user) => ServiceProviderCard(
-                                name: user.name ?? '',
-                                jobTitle: user.category ?? '',
-                                description: user.description ?? '',
-                                rating: user.rating ?? 0,
-                              ))
-                          .toList()),
-            ),
-          )
+          const SizedBox(height: 30),
+          isAppliedForJob
+              ? const Center(
+                  child: Text(
+                  'Applied for job',
+                  style: TextStyle(
+                    color: ColorConstant.success,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ))
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorConstant.primaryColor,
+                      minimumSize: const Size.fromHeight(50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: handleJobApplication,
+                    child: const Text('Apply'),
+                  ),
+                ),
         ],
       ),
     );

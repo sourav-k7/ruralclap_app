@@ -32,7 +32,7 @@ class AppliedJobCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        job.postName,
+                        job.jobTitle,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
@@ -113,8 +113,8 @@ class AppliedJobCard extends StatelessWidget {
                   Column(
                     children: [
                       Row(
-                        children: [
-                          const IconButton(
+                        children: const [
+                          IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
                               onPressed: null,
@@ -122,17 +122,9 @@ class AppliedJobCard extends StatelessWidget {
                                 FontAwesomeIcons.userGroup,
                                 size: 16,
                               )),
-                          const SizedBox(
+                          SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            '${job.numberOfApplicants} Applicants',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.5,
-                            ),
-                          )
                         ],
                       ),
                     ],

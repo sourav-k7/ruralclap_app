@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
-import 'package:ruralclap_app/pages/job_application_page.dart';
+import 'package:ruralclap_app/pages/emp_job_detail_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/layout.dart';
 import 'package:ruralclap_app/pages/login_page.dart';

@@ -7,15 +7,15 @@ import 'package:ruralclap_app/utls/routes.dart';
 
 class AppliedJobCard extends StatelessWidget {
   final Job job;
-  const AppliedJobCard({required this.job});
+  const AppliedJobCard({super.key, required this.job});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesClass.jobInformationPageRoute);
+        Get.toNamed(RoutesClass.jobInformationPageRoute, arguments: job);
       },
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 10,
         child: Padding(

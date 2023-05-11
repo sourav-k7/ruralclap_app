@@ -30,7 +30,6 @@ class _EmployerJobPage extends State<EmployerJobPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_jobController.employerJobList.length);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -56,7 +55,6 @@ class _EmployerJobPage extends State<EmployerJobPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _jobController.employerJobList.map((job) {
-                  print(job.title);
                   return AppliedJobCard(
                     job: job,
                   );

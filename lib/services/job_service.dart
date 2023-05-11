@@ -13,11 +13,12 @@ class JobServices {
     var response = await http.post(
       Uri.parse(ApiRoutes.createJobApi),
       headers: {...headers, 'Authorization': 'Bearer $accessToken'},
-      body: jsonEncode(jobData),
+      body: jsonEncode(jobData.toJson()),
     );
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);
     } else {
+      print(response.body);
       return "Error400";
     }
   }

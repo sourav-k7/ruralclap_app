@@ -11,8 +11,9 @@ class JobController extends GetxController {
   final UserController _userController = Get.find<UserController>();
   RxList<Job> categoryJobList = <Job>[].obs;
   RxList<Job> employerJobList = <Job>[].obs;
-  RxBool jobApplicantLoader = false.obs;
+  RxBool isLoading = false.obs;
   RxList<User> applicantList = <User>[].obs;
+  RxList<Job> appliedJobList = <Job>[].obs;
 
   Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
@@ -83,7 +84,7 @@ class JobController extends GetxController {
 
   Future<void> getJobApplicantList({required int? jobId}) async {
     try {
-      jobApplicantLoader.value = true;
+      isLoading.value = true;
       String accessToken = await getAccessToken();
       var res = await JobServices.getJobApplicantService(
           jobId: jobId, accessToken: accessToken);
@@ -93,10 +94,29 @@ class JobController extends GetxController {
       });
       applicantList.value = resApplicantList;
       applicantList.refresh();
-      jobApplicantLoader.value = false;
+      isLoading.value = false;
     } catch (e) {
       print(e);
-      jobApplicantLoader.value = false;
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getAllUserAppliedJob({required int? userId}) async {
+    try {
+      isLoading.value = true;
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getAllUserAppliedJob(
+          userId: userId, accessToken: accessToken);
+      List<Job> resJobList = [];
+      res.forEach((json) {
+        resJobList.add(Job.fromJson(json['user_id']));
+      });
+      appliedJobList.value = resJobList;
+      appliedJobList.refresh();
+      isLoading.value = false;
+    } catch (e) {
+      print(e);
+      isLoading.value = false;
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/pages/applied_job_page.dart';
 import 'package:ruralclap_app/pages/create_job_page.dart';
 import 'package:ruralclap_app/pages/onboarding_page.dart';
@@ -8,8 +7,7 @@ import 'package:ruralclap_app/pages/user_profile_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 import 'package:ruralclap_app/pages/service_request_page.dart';
 import 'package:ruralclap_app/pages/job_listing_page.dart';
-import 'package:ruralclap_app/pages/job_application_page.dart';
-import 'package:ruralclap_app/pages/layout.dart';
+import 'package:ruralclap_app/pages/job_apply_page.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
 class MyHomePage extends StatefulWidget {

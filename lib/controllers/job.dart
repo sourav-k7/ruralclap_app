@@ -2,6 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/models/job.dart';
+import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/services/job_service.dart';
 
 class JobController extends GetxController {
@@ -10,6 +11,9 @@ class JobController extends GetxController {
   final UserController _userController = Get.find<UserController>();
   RxList<Job> categoryJobList = <Job>[].obs;
   RxList<Job> employerJobList = <Job>[].obs;
+  RxBool isLoading = false.obs;
+  RxList<User> applicantList = <User>[].obs;
+  RxList<Job> appliedJobList = <Job>[].obs;
 
   Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
@@ -32,8 +36,8 @@ class JobController extends GetxController {
       var res = await JobServices.listEmployerJobsService(
           accessToken: accessToken, employerId: employerId);
       List<Job> resJobList = [];
-      print(res);
       res.forEach((jsonJob) {
+        jsonJob['fields']['id'] = jsonJob['pk'];
         resJobList.add(Job.fromJson(jsonJob['fields']));
       });
       employerJobList.value = resJobList;
@@ -76,5 +80,43 @@ class JobController extends GetxController {
       print(e);
       return false;
     }
+  }
+
+  Future<void> getJobApplicantList({required int? jobId}) async {
+    try {
+      isLoading.value = true;
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getJobApplicantService(
+          jobId: jobId, accessToken: accessToken);
+      List<User> resApplicantList = [];
+      res.forEach((json) {
+        resApplicantList.add(User.fromJson(json['user_id']));
+      });
+      applicantList.value = resApplicantList;
+      applicantList.refresh();
+      isLoading.value = false;
+    } catch (e) {
+      print(e);
+      isLoading.value = false;
+    }
+  }
+
+  Future<List<Job>> getAllUserAppliedJob({required int? userId}) async {
+    try {
+      isLoading.value = true;
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getAllUserAppliedJob(
+          userId: userId, accessToken: accessToken);
+      List<Job> resJobList = [];
+      res.forEach((json) {
+        resJobList.add(Job.fromJson(json['job_id']));
+      });
+      isLoading.value = false;
+      return resJobList;
+    } catch (e) {
+      print(e);
+      isLoading.value = false;
+    }
+    return [];
   }
 }

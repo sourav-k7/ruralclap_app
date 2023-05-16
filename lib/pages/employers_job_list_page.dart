@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/utls/routes.dart';
-import 'package:ruralclap_app/widgets/AppliedJobCard.dart';
+import 'package:ruralclap_app/widgets/Applied_Job_Card.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +30,6 @@ class _EmployerJobPage extends State<EmployerJobPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_jobController.employerJobList.length);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -56,7 +55,6 @@ class _EmployerJobPage extends State<EmployerJobPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _jobController.employerJobList.map((job) {
-                  print(job.title);
                   return AppliedJobCard(
                     job: job,
                   );

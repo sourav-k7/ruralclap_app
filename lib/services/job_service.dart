@@ -13,11 +13,12 @@ class JobServices {
     var response = await http.post(
       Uri.parse(ApiRoutes.createJobApi),
       headers: {...headers, 'Authorization': 'Bearer $accessToken'},
-      body: jsonEncode(jobData),
+      body: jsonEncode(jobData.toJson()),
     );
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);
     } else {
+      print(response.body);
       return "Error400";
     }
   }
@@ -74,6 +75,32 @@ class JobServices {
         return true;
       }
       throw Exception('Error while applying for job');
+    }
+  }
+
+  static Future<dynamic> getJobApplicantService(
+      {required int? jobId, required String accessToken}) async {
+    var response = await http.get(
+      Uri.parse('${ApiRoutes.jobApplicantList}?id=$jobId'),
+      headers: {...headers, 'Authorization': 'Bearer $accessToken'},
+    );
+    if (response.statusCode.toString().contains('2')) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error while getting job details');
+    }
+  }
+
+  static Future<dynamic> getAllUserAppliedJob(
+      {required int? userId, required String accessToken}) async {
+    var response = await http.get(
+      Uri.parse('${ApiRoutes.appliedJob}?id=$userId'),
+      headers: {...headers, 'Authorization': 'Bearer $accessToken'},
+    );
+    if (response.statusCode.toString().contains('2')) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error while getting job details');
     }
   }
 }

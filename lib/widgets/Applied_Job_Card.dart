@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/utls/routes.dart';
 
 class AppliedJobCard extends StatelessWidget {
   final Job job;
-  const AppliedJobCard({required this.job});
+  AppliedJobCard({super.key, required this.job});
+  final UserController _userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesClass.jobInformationPageRoute);
+        if (_userController.user.isEmployer!) {
+          Get.toNamed(RoutesClass.empJobDetailPage, arguments: job);
+        } else {
+          Get.toNamed(RoutesClass.serviceProviderJobDetailPage, arguments: job);
+        }
       },
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 10,
         child: Padding(
@@ -42,17 +48,12 @@ class AppliedJobCard extends StatelessWidget {
                       Text(
                         job.category ?? '',
                         style: const TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 1.15,
-                            fontWeight: FontWeight.w400),
+                            letterSpacing: 1.15, fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
                   const Icon(Icons.business, size: 45)
                 ],
-              ),
-              const SizedBox(
-                height: 20,
               ),
               Container(
                 width: 110,

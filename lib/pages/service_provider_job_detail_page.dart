@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
-import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 
-class EmpJobDetailPage extends StatefulWidget {
-  const EmpJobDetailPage({super.key});
+class ServiceProviderJobDetailPage extends StatelessWidget {
+  ServiceProviderJobDetailPage({super.key});
 
-  @override
-  State<EmpJobDetailPage> createState() => _EmpJobDetailPageState();
-}
-
-class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
   final Job _job = Get.arguments;
-  final JobController _jobController = Get.find<JobController>();
-
-  @override
-  void initState() {
-    _jobController.getJobApplicantList(jobId: _job.id);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,34 +59,6 @@ class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
             skills: _job.requiredSkills!,
           ),
           const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Applicant",
-              style: TextStyle(
-                color: ColorConstant.textPrimaryBlack,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Obx(
-              () => _jobController.isLoading.value
-                  ? const CircularProgressIndicator()
-                  : Column(
-                      children: _jobController.applicantList
-                          .map((user) => ServiceProviderCard(
-                                name: user.name ?? '',
-                                jobTitle: user.category ?? '',
-                                description: user.description ?? '',
-                                rating: user.rating ?? 0,
-                              ))
-                          .toList()),
-            ),
-          )
         ],
       ),
     );

@@ -6,6 +6,7 @@ import 'package:ruralclap_app/pages/job_listing_page.dart';
 import 'package:ruralclap_app/pages/layout.dart';
 import 'package:ruralclap_app/pages/login_page.dart';
 import 'package:ruralclap_app/pages/onboarding_page.dart';
+import 'package:ruralclap_app/pages/service_provider_job_detail_page.dart';
 import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 
 class RoutesClass {
@@ -18,6 +19,8 @@ class RoutesClass {
   static String jobDetailPageRoute = '/job-info-page';
   static String serviceProviderListingPageRoute = '/service-provider-listing';
   static String empJobDetailPage = '/emp-job-detail-page';
+  static String serviceProviderJobDetailPage =
+      '/service-provider-job-detail-page';
 
   static List<GetPage> routes = [
     // GetPage(name: nav, page: () => LayoutPage()),
@@ -31,5 +34,8 @@ class RoutesClass {
         name: serviceProviderListingPageRoute,
         page: () => ServiceProviderListPage()),
     GetPage(name: empJobDetailPage, page: () => const EmpJobDetailPage()),
+    GetPage(
+        name: serviceProviderJobDetailPage,
+        page: () => ServiceProviderJobDetailPage()),
   ];
 }

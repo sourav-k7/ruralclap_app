@@ -101,7 +101,7 @@ class JobController extends GetxController {
     }
   }
 
-  Future<void> getAllUserAppliedJob({required int? userId}) async {
+  Future<List<Job>> getAllUserAppliedJob({required int? userId}) async {
     try {
       isLoading.value = true;
       String accessToken = await getAccessToken();
@@ -109,14 +109,14 @@ class JobController extends GetxController {
           userId: userId, accessToken: accessToken);
       List<Job> resJobList = [];
       res.forEach((json) {
-        resJobList.add(Job.fromJson(json['user_id']));
+        resJobList.add(Job.fromJson(json['job_id']));
       });
-      appliedJobList.value = resJobList;
-      appliedJobList.refresh();
       isLoading.value = false;
+      return resJobList;
     } catch (e) {
       print(e);
       isLoading.value = false;
     }
+    return [];
   }
 }

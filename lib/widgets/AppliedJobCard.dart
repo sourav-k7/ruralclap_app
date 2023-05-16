@@ -47,17 +47,12 @@ class AppliedJobCard extends StatelessWidget {
                       Text(
                         job.category ?? '',
                         style: const TextStyle(
-                            fontSize: 14,
-                            letterSpacing: 1.15,
-                            fontWeight: FontWeight.w400),
+                            letterSpacing: 1.15, fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
                   const Icon(Icons.business, size: 45)
                 ],
-              ),
-              const SizedBox(
-                height: 20,
               ),
               Container(
                 width: 110,

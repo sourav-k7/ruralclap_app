@@ -16,8 +16,9 @@ class AppliedJobCard extends StatelessWidget {
       onTap: () {
         if (_userController.user.isEmployer!) {
           Get.toNamed(RoutesClass.empJobDetailPage, arguments: job);
+        } else {
+          Get.toNamed(RoutesClass.serviceProviderJobDetailPage, arguments: job);
         }
-        Get.toNamed(RoutesClass.serviceProviderJobDetailPage, arguments: job);
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),

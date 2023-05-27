@@ -18,7 +18,6 @@ class UserServices {
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);
     } else {
-      print(response.body);
       return "Error400";
       // String error = jsonDecode(response.body)['message'];
       // throw (error);

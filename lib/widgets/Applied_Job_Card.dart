@@ -56,7 +56,7 @@ class AppliedJobCard extends StatelessWidget {
                 ],
               ),
               Container(
-                width: 110,
+                width: 120,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: ColorConstant.lightBackgroundColor),
@@ -86,68 +86,68 @@ class AppliedJobCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        children: const [
-                          IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: null,
-                              icon: FaIcon(
-                                FontAwesomeIcons.calendar,
-                                size: 20,
-                              )),
-                          Text(
-                            'Applied on date',
-                            // ${DateFormat.yMMMd().format(job.appliedDate).toString()}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.02,
-                              color: ColorConstant.textPrimaryBlack,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: const [
-                          IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: null,
-                              icon: FaIcon(
-                                FontAwesomeIcons.userGroup,
-                                size: 16,
-                              )),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '0 Applicants',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.5,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              )
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Column(
+              //       children: [
+              //         Row(
+              //           children: const [
+              //             IconButton(
+              //                 padding: EdgeInsets.zero,
+              //                 constraints: BoxConstraints(),
+              //                 onPressed: null,
+              //                 icon: FaIcon(
+              //                   FontAwesomeIcons.calendar,
+              //                   size: 20,
+              //                 )),
+              //             Text(
+              //               'Applied on date',
+              //               // ${DateFormat.yMMMd().format(job.appliedDate).toString()}',
+              //               style: TextStyle(
+              //                 fontSize: 12,
+              //                 fontWeight: FontWeight.w400,
+              //                 letterSpacing: 1.02,
+              //                 color: ColorConstant.textPrimaryBlack,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //     Column(
+              //       children: [
+              //         Row(
+              //           children: const [
+              //             IconButton(
+              //                 padding: EdgeInsets.zero,
+              //                 constraints: BoxConstraints(),
+              //                 onPressed: null,
+              //                 icon: FaIcon(
+              //                   FontAwesomeIcons.userGroup,
+              //                   size: 16,
+              //                 )),
+              //             SizedBox(
+              //               width: 5,
+              //             ),
+              //             Text(
+              //               '0 Applicants',
+              //               style: TextStyle(
+              //                 fontSize: 12,
+              //                 fontWeight: FontWeight.w400,
+              //                 letterSpacing: 1.5,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ],
+              //     )
+              //   ],
+              // )
             ],
           ),
         ),

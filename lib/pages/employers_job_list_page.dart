@@ -23,7 +23,7 @@ class _EmployerJobPage extends State<EmployerJobPage> {
     super.initState();
 
     if (_userController.user.email != null) {
-      int? employerId = _userController.user.id;
+      int employerId = _userController.user.id!;
       _jobController.listEmployerJobs(employerId: employerId);
     }
   }
@@ -72,7 +72,8 @@ class _EmployerJobPage extends State<EmployerJobPage> {
           child: FloatingActionButton(
             mini: false,
             onPressed: () {
-              Get.toNamed(RoutesClass.createJobPageRoute);
+              Get.toNamed(RoutesClass.createJobPageRoute,
+                  arguments: {'status': 'Hiring'});
             },
             backgroundColor: ColorConstant.primaryColor,
             child: const FaIcon(

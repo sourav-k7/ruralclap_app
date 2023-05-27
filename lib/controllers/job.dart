@@ -6,14 +6,13 @@ import 'package:ruralclap_app/models/user.dart';
 import 'package:ruralclap_app/services/job_service.dart';
 
 class JobController extends GetxController {
-  final Rx<Job> _job = Job().obs;
-  Job get job => _job.value;
   final UserController _userController = Get.find<UserController>();
   RxList<Job> categoryJobList = <Job>[].obs;
   RxList<Job> employerJobList = <Job>[].obs;
   RxBool isLoading = false.obs;
   RxList<User> applicantList = <User>[].obs;
   RxList<Job> appliedJobList = <Job>[].obs;
+  RxList<Job> jobRequestList = <Job>[].obs;
 
   Future<String> getAccessToken() async {
     const storage = FlutterSecureStorage();
@@ -26,19 +25,19 @@ class JobController extends GetxController {
     var res = await JobServices.createJobService(
         accessToken: accessToken, jobData: jobData);
     if (res != 'Error400') {
-      _job.value = Job.fromJson(res);
+      // _job.value = Job.fromJson(res);
     }
   }
 
-  Future<void> listEmployerJobs({required int? employerId}) async {
+  Future<void> listEmployerJobs({required int employerId}) async {
     try {
       String accessToken = await getAccessToken();
       var res = await JobServices.listEmployerJobsService(
           accessToken: accessToken, employerId: employerId);
       List<Job> resJobList = [];
       res.forEach((jsonJob) {
-        jsonJob['fields']['id'] = jsonJob['pk'];
-        resJobList.add(Job.fromJson(jsonJob['fields']));
+        // jsonJob['fields']['id'] = jsonJob['pk'];
+        resJobList.add(Job.fromJson(jsonJob));
       });
       employerJobList.value = resJobList;
       employerJobList.refresh();
@@ -47,18 +46,37 @@ class JobController extends GetxController {
     }
   }
 
-  Future<void> getJobList() async {
+  Future<List<Job>> getJobList({required status}) async {
     try {
       String accessToken = await getAccessToken();
       var res = await JobServices.getJobList(
           accessToken: accessToken,
-          category: _userController.user.category ?? '');
+          category: _userController.user.category ?? '',
+          status: status);
       List<Job> resJobList = [];
       res.forEach((jsonJob) {
         resJobList.add(Job.fromJson(jsonJob));
       });
-      categoryJobList.value = resJobList;
-      categoryJobList.refresh();
+      return resJobList;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<void> getJobRequestList({required status}) async {
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.getJobList(
+          accessToken: accessToken,
+          category: _userController.user.category ?? '',
+          status: status);
+      List<Job> resJobList = [];
+      res.forEach((jsonJob) {
+        resJobList.add(Job.fromJson(jsonJob));
+      });
+      jobRequestList.value = resJobList;
+      jobRequestList.refresh();
     } catch (e) {
       print(e);
     }
@@ -118,5 +136,30 @@ class JobController extends GetxController {
       isLoading.value = false;
     }
     return [];
+  }
+
+  Future<bool> jobAction(
+      {int userId = -1, required String status, required int jobId}) async {
+    try {
+      String accessToken = await getAccessToken();
+      var res = await JobServices.jobActionService(
+          jobId: jobId,
+          status: status,
+          userId: userId,
+          accessToken: accessToken);
+
+      jobRequestList.removeWhere((job) {
+        if (job.id != jobId) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      jobRequestList.refresh();
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }

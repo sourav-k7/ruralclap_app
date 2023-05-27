@@ -18,6 +18,8 @@ class _CreateJobPageState extends State<CreateJobPage> {
   final _formKey = GlobalKey<FormState>();
   final UserController _userController = Get.find<UserController>();
   final _jobController = JobController();
+  String status = Get.arguments['status'];
+
   @override
   void initState() {
     super.initState();
@@ -25,7 +27,10 @@ class _CreateJobPageState extends State<CreateJobPage> {
     if (_userController.user.email != null) {
       _job.employer = _userController.user.id;
     }
-    _job.status = "Hiring";
+    _job.status = status;
+    if (status == 'Requested') {
+      _job.serviceProvider?.id = Get.arguments['userId'];
+    }
   }
 
   @override
@@ -34,9 +39,9 @@ class _CreateJobPageState extends State<CreateJobPage> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Get.back(), icon: const Icon(Icons.arrow_back)),
-        title: const Text(
-          'Create Job',
-          style: TextStyle(
+        title: Text(
+          status == 'Hiring' ? 'Create Job' : 'Service Request',
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),

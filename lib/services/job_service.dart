@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../constant/api_routes.dart';
 import '../models/job.dart';
@@ -18,13 +19,12 @@ class JobServices {
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);
     } else {
-      print(response.body);
       return "Error400";
     }
   }
 
   static Future<dynamic> listEmployerJobsService(
-      {required String accessToken, required int? employerId}) async {
+      {required String accessToken, required int employerId}) async {
     var response = await http.get(
       Uri.parse(ApiRoutes.listEmployerJobsApi),
       headers: {
@@ -34,16 +34,18 @@ class JobServices {
       },
     );
     if (response.statusCode.toString().contains('2')) {
-      return jsonDecode(jsonDecode(response.body)['data']);
+      return jsonDecode(response.body)['data'];
     } else {
       throw Exception('Some error occurred while fetching create job data');
     }
   }
 
   static Future<dynamic> getJobList(
-      {required String accessToken, required String category}) async {
+      {required String accessToken,
+      required String category,
+      required String status}) async {
     var response = await http.get(
-      Uri.parse('${ApiRoutes.getJob}?category=$category'),
+      Uri.parse('${ApiRoutes.getJob}?category=$category&status=$status'),
       headers: {
         ...headers,
         'Authorization': 'Bearer $accessToken',
@@ -101,6 +103,24 @@ class JobServices {
       return jsonDecode(response.body);
     } else {
       throw Exception('Error while getting job details');
+    }
+  }
+
+  static Future<dynamic> jobActionService({
+    required String status,
+    required int jobId,
+    required String accessToken,
+    required int userId,
+  }) async {
+    var res = await http.patch(
+      Uri.parse('${ApiRoutes.jobAction}${jobId}/'),
+      body: jsonEncode({'status': status, 'service_provider': userId}),
+      headers: {...headers, 'Authorization': 'Bearer $accessToken'},
+    );
+    if (res.statusCode / 100 == 2) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

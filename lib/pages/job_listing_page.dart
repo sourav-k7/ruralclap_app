@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/job.dart';
+import 'package:ruralclap_app/models/job.dart';
 import '/widgets/job_card.dart';
 
 class JobListing extends StatefulWidget {
@@ -12,12 +13,18 @@ class JobListing extends StatefulWidget {
 
 class _JobListingState extends State<JobListing> {
   final JobController _jobController = Get.find<JobController>();
+  List<Job> _job = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _jobController.getJobList();
+    handleGetJobs();
+  }
+
+  Future<void> handleGetJobs() async {
+    _job = await _jobController.getJobList(status: 'Hiring');
+    setState(() {});
   }
 
   @override
@@ -55,17 +62,15 @@ class _JobListingState extends State<JobListing> {
             ),
 
             const SizedBox(height: 15.0),
-            Obx(
-              () => isLoading
-                  ? const CircularProgressIndicator()
-                  : Column(
-                      children: _jobController.categoryJobList
-                          .map((job) => JobCard(
-                                job: job,
-                              ))
-                          .toList(),
-                    ),
-            ),
+            isLoading
+                ? const CircularProgressIndicator()
+                : Column(
+                    children: _job
+                        .map((job) => JobCard(
+                              job: job,
+                            ))
+                        .toList(),
+                  ),
           ],
         ),
       ),

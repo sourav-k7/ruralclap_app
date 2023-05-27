@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:random_avatar/random_avatar.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/constant/job_category.dart';
-
-class EmpDetail {
-  String name;
-  String jobTitle;
-  double rating;
-  String description;
-  EmpDetail({
-    required this.name,
-    required this.jobTitle,
-    required this.rating,
-    required this.description,
-  });
-}
+import 'package:ruralclap_app/utls/routes.dart';
+import 'package:ruralclap_app/widgets/Service_Provider_card.dart';
 
 class ServiceProviderListPage extends StatefulWidget {
   ServiceProviderListPage({super.key});
@@ -129,97 +120,19 @@ class _ServiceProviderListPageState extends State<ServiceProviderListPage> {
                                 jobTitle: user.category ?? '',
                                 description: user.description ?? '',
                                 rating: user.rating ?? 0,
+                                onHire: () {
+                                  Get.toNamed(RoutesClass.createJobPageRoute,
+                                      arguments: {
+                                        'status': 'Requested',
+                                        'userId': user.id!
+                                      });
+                                },
                               ))
                           .toList()),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class ServiceProviderCard extends StatelessWidget {
-  const ServiceProviderCard(
-      {super.key,
-      required this.name,
-      required this.jobTitle,
-      required this.description,
-      required this.rating});
-
-  final String name, jobTitle, description;
-  final double rating;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            width: 2,
-            color: ColorConstant.borderGrey,
-          )),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              width: 2,
-              color: ColorConstant.borderGrey,
-            ),
-          ),
-          child: const Icon(
-            Icons.person_outline,
-            color: ColorConstant.textBody,
-            size: 30,
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              Text(
-                jobTitle,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              Text(
-                'Rating: $rating',
-              ),
-              Text(
-                description,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          style: const ButtonStyle(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: const Text('Hire me'),
-        )
-      ]),
     );
   }
 }

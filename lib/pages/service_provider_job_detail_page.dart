@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/controllers/job.dart';
+import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
-import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 
-class ServiceProviderJobDetailPage extends StatelessWidget {
+class ServiceProviderJobDetailPage extends StatefulWidget {
   ServiceProviderJobDetailPage({super.key});
 
+  @override
+  State<ServiceProviderJobDetailPage> createState() =>
+      _ServiceProviderJobDetailPageState();
+}
+
+class _ServiceProviderJobDetailPageState
+    extends State<ServiceProviderJobDetailPage> {
   final Job _job = Get.arguments;
+  final UserController _userController = Get.find<UserController>();
+  final JobController _jobController = Get.find<JobController>();
+  bool isActionDone = false;
+  String successMessage = '';
+
+  void handleJobAction({required String status}) async {
+    isActionDone = await _jobController.jobAction(
+        status: status, jobId: _job.id!, userId: _userController.user.id!);
+    setState(() {
+      if (status == 'Rejected') {
+        successMessage = 'Job Rejected';
+      } else {
+        successMessage = 'Job Accepted';
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +83,63 @@ class ServiceProviderJobDetailPage extends StatelessWidget {
             skills: _job.requiredSkills!,
           ),
           const SizedBox(height: 20),
+          _job.status == 'Requested'
+              ? isActionDone
+                  ? Center(
+                      child: Text(
+                      successMessage,
+                      style: const TextStyle(
+                        color: ColorConstant.success,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ))
+                  : Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorConstant.primaryColor,
+                              minimumSize: const Size.fromHeight(50),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 15),
+                              textStyle: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              handleJobAction(status: 'In Progress');
+                            },
+                            child: const Text('Accept'),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorConstant.error,
+                              minimumSize: const Size.fromHeight(50),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 15),
+                              textStyle: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              handleJobAction(status: 'Rejected');
+                            },
+                            child: const Text('Reject'),
+                          ),
+                        )
+                      ],
+                    )
+              : const SizedBox()
         ],
       ),
     );

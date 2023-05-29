@@ -19,14 +19,14 @@ class AppliedJobs extends StatelessWidget {
             'My Jobs',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: ColorConstant.textPrimaryBlack,
+              color: ColorConstant.textPrimaryWhite,
               fontSize: 20,
               fontWeight: FontWeight.w700,
               letterSpacing: 1.5,
             ),
           ),
-          centerTitle: true,
-          backgroundColor: ColorConstant.lightBackgroundColor,
+          centerTitle: false,
+          backgroundColor: ColorConstant.primaryColor,
           elevation: 0,
           bottom: const TabBar(
             indicatorColor: ColorConstant.primaryColor,
@@ -34,14 +34,14 @@ class AppliedJobs extends StatelessWidget {
               Tab(
                 child: Text(
                   'Applied',
-                  style: TextStyle(color: ColorConstant.textPrimaryBlack),
+                  style: TextStyle(color: ColorConstant.textPrimaryWhite),
                 ),
               ),
               Tab(
                 child: Text(
                   'Requested',
                   style: TextStyle(
-                    color: ColorConstant.textPrimaryBlack,
+                    color: ColorConstant.textPrimaryWhite,
                   ),
                 ),
               ),

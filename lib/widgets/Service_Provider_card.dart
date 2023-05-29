@@ -27,7 +27,7 @@ class ServiceProviderCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          RandomAvatar('saytoonz', height: 50, width: 50),
+          RandomAvatar(name, height: 50, width: 50),
           const SizedBox(
             width: 10,
           ),

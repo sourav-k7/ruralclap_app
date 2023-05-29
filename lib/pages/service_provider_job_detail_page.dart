@@ -58,91 +58,93 @@ class _ServiceProviderJobDetailPageState
         backgroundColor: ColorConstant.primaryColor,
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CompanyCard(
-            title: _job.title!,
-            category: _job.category!,
-          ),
-          const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "Job Details",
-              style: TextStyle(
-                color: ColorConstant.textPrimaryBlack,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CompanyCard(
+              title: _job.title!,
+              category: _job.category!,
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Job Details",
+                style: TextStyle(
+                  color: ColorConstant.textPrimaryBlack,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          CompanyCardDetailed(
-            location: _job.location!,
-            description: _job.description!,
-            expectedPay: _job.pay!.toString(),
-            skills: _job.requiredSkills!,
-          ),
-          const SizedBox(height: 20),
-          _job.status == 'Requested'
-              ? isActionDone
-                  ? Center(
-                      child: Text(
-                      successMessage,
-                      style: const TextStyle(
-                        color: ColorConstant.success,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ))
-                  : Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorConstant.primaryColor,
-                              minimumSize: const Size.fromHeight(50),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 40, vertical: 15),
-                              textStyle: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            onPressed: () {
-                              handleJobAction(status: 'In Progress');
-                            },
-                            child: const Text('Accept'),
-                          ),
+            const SizedBox(height: 10),
+            CompanyCardDetailed(
+              location: _job.location!,
+              description: _job.description!,
+              expectedPay: _job.pay!.toString(),
+              skills: _job.requiredSkills!,
+            ),
+            const SizedBox(height: 20),
+            _job.status == 'Requested'
+                ? isActionDone
+                    ? Center(
+                        child: Text(
+                        successMessage,
+                        style: const TextStyle(
+                          color: ColorConstant.success,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorConstant.error,
-                              minimumSize: const Size.fromHeight(50),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 40, vertical: 15),
-                              textStyle: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                      ))
+                    : Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorConstant.primaryColor,
+                                minimumSize: const Size.fromHeight(50),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 15),
+                                textStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                              onPressed: () {
+                                handleJobAction(status: 'In Progress');
+                              },
+                              child: const Text('Accept'),
                             ),
-                            onPressed: () {
-                              handleJobAction(status: 'Rejected');
-                            },
-                            child: const Text('Reject'),
                           ),
-                        )
-                      ],
-                    )
-              : const SizedBox()
-        ],
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorConstant.error,
+                                minimumSize: const Size.fromHeight(50),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 15),
+                                textStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              onPressed: () {
+                                handleJobAction(status: 'Rejected');
+                              },
+                              child: const Text('Reject'),
+                            ),
+                          )
+                        ],
+                      )
+                : const SizedBox()
+          ],
+        ),
       ),
     );
   }

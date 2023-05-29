@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/models/job.dart';
-import 'package:ruralclap_app/pages/service_provider_list_page.dart';
 import 'package:ruralclap_app/widgets/Service_Provider_card.dart';
 
 class EmpJobDetailPage extends StatefulWidget {

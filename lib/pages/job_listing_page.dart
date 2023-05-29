@@ -31,17 +31,16 @@ class _JobListingState extends State<JobListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorConstant.primaryColor,
+        elevation: 0,
         title: const Text(
-          "Jobs",
+          'Jobs',
           style: TextStyle(
-            color: ColorConstant.textPrimaryBlack,
+            color: ColorConstant.textPrimaryWhite,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 22,
           ),
         ),
-        centerTitle: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

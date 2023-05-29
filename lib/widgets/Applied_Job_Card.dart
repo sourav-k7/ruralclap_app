@@ -21,11 +21,10 @@ class AppliedJobCard extends StatelessWidget {
         }
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 10,
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        elevation: 2,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

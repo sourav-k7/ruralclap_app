@@ -36,7 +36,8 @@ class JobServices {
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body)['data'];
     } else {
-      throw Exception('Some error occurred while fetching create job data');
+      throw Exception(
+          'Some error occurred while fetching emp created job data');
     }
   }
 

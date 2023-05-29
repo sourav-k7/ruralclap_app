@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ruralclap',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Roboto',
         primarySwatch: const MaterialColor(0xFF0066ff, <int, Color>{

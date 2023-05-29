@@ -32,18 +32,16 @@ class _EmployerJobPage extends State<EmployerJobPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorConstant.primaryColor,
+        elevation: 0,
         title: const Text(
           'Jobs You Created in the Past',
-          textAlign: TextAlign.center,
           style: TextStyle(
-            color: ColorConstant.textPrimaryBlack,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
+            color: ColorConstant.textPrimaryWhite,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: ColorConstant.lightBackgroundColor,
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(

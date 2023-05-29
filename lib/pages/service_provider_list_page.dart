@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:random_avatar/random_avatar.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
-import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/constant/job_category.dart';
 import 'package:ruralclap_app/utls/routes.dart';

@@ -13,10 +13,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      // ),
       body: Container(
         color: ColorConstant.primaryColor,
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -28,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               Text(
-                'Ruralclap',
+                'RURALCLAP',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,

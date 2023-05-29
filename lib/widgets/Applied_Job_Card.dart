@@ -48,7 +48,9 @@ class AppliedJobCard extends StatelessWidget {
                       Text(
                         job.category ?? '',
                         style: const TextStyle(
-                            letterSpacing: 1.15, fontWeight: FontWeight.w400),
+                          letterSpacing: 1.15,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),

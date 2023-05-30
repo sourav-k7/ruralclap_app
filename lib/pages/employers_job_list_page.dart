@@ -23,7 +23,7 @@ class _EmployerJobPage extends State<EmployerJobPage> {
     super.initState();
 
     if (_userController.user.email != null) {
-      int? employerId = _userController.user.id;
+      int employerId = _userController.user.id!;
       _jobController.listEmployerJobs(employerId: employerId);
     }
   }
@@ -32,18 +32,16 @@ class _EmployerJobPage extends State<EmployerJobPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorConstant.primaryColor,
+        elevation: 0,
         title: const Text(
           'Jobs You Created in the Past',
-          textAlign: TextAlign.center,
           style: TextStyle(
-            color: ColorConstant.textPrimaryBlack,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
+            color: ColorConstant.textPrimaryWhite,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: ColorConstant.lightBackgroundColor,
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,7 +70,8 @@ class _EmployerJobPage extends State<EmployerJobPage> {
           child: FloatingActionButton(
             mini: false,
             onPressed: () {
-              Get.toNamed(RoutesClass.createJobPageRoute);
+              Get.toNamed(RoutesClass.createJobPageRoute,
+                  arguments: {'status': 'Hiring'});
             },
             backgroundColor: ColorConstant.primaryColor,
             child: const FaIcon(

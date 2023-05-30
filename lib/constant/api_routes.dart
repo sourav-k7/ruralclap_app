@@ -11,6 +11,7 @@ class ApiRoutes {
   static String createJobApi = '$url/jobs/create/';
   static String listEmployerJobsApi = '$url/jobs/list-employer/';
   static String getJob = '$url/jobs/list';
+  static String jobAction = '$url/jobs/update/';
 
   //Job application
   static String applyJob = '$url/job-application/create/';

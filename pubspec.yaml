@@ -44,6 +44,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   custom_radio_grouped_button: ^2.1.2+2
   flutter_secure_storage: ^8.0.0
+  random_avatar: ^0.0.8
 
 dev_dependencies:
   flutter_test:

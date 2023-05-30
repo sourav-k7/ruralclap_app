@@ -74,7 +74,9 @@ class UserController extends GetxController {
       res['data'] = jsonDecode(res['data']);
       List<User> recoList = [];
       res['data'].forEach((provider) {
-        recoList.add(User.fromJson(provider['fields']));
+        User newUser = User.fromJson(provider['fields']);
+        newUser.id = provider['pk'];
+        recoList.add(newUser);
       });
       recoServiceProvider.value = recoList;
       recoServiceProvider.refresh();

@@ -48,7 +48,7 @@ class Job {
     data['required_skills'] = requiredSkills;
     data['status'] = status;
     data['employer'] = employer;
-    // data['service_provider'] = serviceProvider;
+    data['service_provider'] = serviceProvider?.toJson() ?? '';
     data['category'] = category;
     data['location'] = location;
     return data;

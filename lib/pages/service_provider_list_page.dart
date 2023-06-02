@@ -4,7 +4,7 @@ import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/constant/job_category.dart';
 import 'package:ruralclap_app/utls/routes.dart';
-import 'package:ruralclap_app/widgets/Service_Provider_card.dart';
+import 'package:ruralclap_app/widgets/serviceProviderCard.dart';
 
 class ServiceProviderListPage extends StatefulWidget {
   ServiceProviderListPage({super.key});

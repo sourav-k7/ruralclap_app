@@ -5,6 +5,7 @@ import 'package:ruralclap_app/controllers/user.dart';
 import 'package:ruralclap_app/models/job.dart';
 import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
+import 'package:ruralclap_app/models/user.dart';
 
 class CreateJobPage extends StatefulWidget {
   const CreateJobPage({super.key});
@@ -29,6 +30,7 @@ class _CreateJobPageState extends State<CreateJobPage> {
     }
     _job.status = status;
     if (status == 'Requested') {
+      _job.serviceProvider = User();
       _job.serviceProvider?.id = Get.arguments['userId'];
     }
   }

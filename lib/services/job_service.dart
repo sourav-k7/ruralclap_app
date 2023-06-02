@@ -11,10 +11,11 @@ class JobServices {
 
   static Future<dynamic> createJobService(
       {required String accessToken, required Job jobData}) async {
+    var jsonData = jobData.toJson();
     var response = await http.post(
       Uri.parse(ApiRoutes.createJobApi),
       headers: {...headers, 'Authorization': 'Bearer $accessToken'},
-      body: jsonEncode(jobData.toJson()),
+      body: jsonEncode(jsonData),
     );
     if (response.statusCode.toString().contains('2')) {
       return jsonDecode(response.body);

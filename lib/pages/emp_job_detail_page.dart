@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ruralclap_app/constant/theme_color.dart';
 import 'package:ruralclap_app/controllers/job.dart';
 import 'package:ruralclap_app/models/job.dart';
-import 'package:ruralclap_app/widgets/Service_Provider_card.dart';
+import 'package:ruralclap_app/widgets/serviceProviderCard.dart';
 
 class EmpJobDetailPage extends StatefulWidget {
   const EmpJobDetailPage({super.key});
@@ -78,78 +78,76 @@ class _EmpJobDetailPageState extends State<EmpJobDetailPage> {
             ),
             const SizedBox(height: 20),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: _job.status == 'Hiring'
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Applicant",
-                            style: TextStyle(
-                              color: ColorConstant.textPrimaryBlack,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: _job.status == 'Hiring'
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Applicant",
+                          style: TextStyle(
+                            color: ColorConstant.textPrimaryBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                          const SizedBox(height: 10),
-                          Obx(
-                            () => _jobController.isLoading.value
-                                ? const CircularProgressIndicator()
-                                : Column(
-                                    children: _jobController.applicantList
-                                        .map((user) => ServiceProviderCard(
-                                              name: user.name ?? '',
-                                              jobTitle: user.category ?? '',
-                                              description:
-                                                  user.description ?? '',
-                                              rating: user.rating ?? 0,
-                                              onHire: () async {
-                                                await _jobController.jobAction(
-                                                    status: 'In Progress',
-                                                    jobId: _job.id!,
-                                                    userId: user.id!);
-                                                setState(() {
-                                                  _job.status = 'In Progress';
-                                                  _job.serviceProvider?.name =
-                                                      user.name;
-                                                  _job.serviceProvider
-                                                          ?.category =
-                                                      user.category;
-                                                  _job.serviceProvider
-                                                          ?.description =
-                                                      user.description;
-                                                  _job.serviceProvider?.rating =
-                                                      user.rating;
-                                                });
-                                              },
-                                            ))
-                                        .toList()),
+                        ),
+                        const SizedBox(height: 10),
+                        Obx(
+                          () => _jobController.isLoading.value
+                              ? const CircularProgressIndicator()
+                              : Column(
+                                  children: _jobController.applicantList
+                                      .map((user) => ServiceProviderCard(
+                                            name: user.name ?? '',
+                                            jobTitle: user.category ?? '',
+                                            description: user.description ?? '',
+                                            rating: user.rating ?? 0,
+                                            onHire: () async {
+                                              await _jobController.jobAction(
+                                                  status: 'In Progress',
+                                                  jobId: _job.id!,
+                                                  userId: user.id!);
+                                              setState(() {
+                                                _job.status = 'In Progress';
+                                                _job.serviceProvider?.name =
+                                                    user.name;
+                                                _job.serviceProvider?.category =
+                                                    user.category;
+                                                _job.serviceProvider
+                                                        ?.description =
+                                                    user.description;
+                                                _job.serviceProvider?.rating =
+                                                    user.rating;
+                                              });
+                                            },
+                                          ))
+                                      .toList()),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _job.status == 'In Progress'
+                              ? "Hired Service provider"
+                              : "Requested Service Provider",
+                          style: const TextStyle(
+                            color: ColorConstant.textPrimaryBlack,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                        ],
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _job.status == 'In Progress'
-                                ? "Hired Service provider"
-                                : "Requested Service Provider",
-                            style: const TextStyle(
-                              color: ColorConstant.textPrimaryBlack,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          ServiceProviderCard(
-                            name: _job.serviceProvider!.name ?? '',
-                            jobTitle: _job.serviceProvider!.category ?? '',
-                            description:
-                                _job.serviceProvider!.description ?? '',
-                            rating: _job.serviceProvider!.rating ?? 0,
-                          )
-                        ],
-                      ))
+                        ),
+                        const SizedBox(height: 10),
+                        ServiceProviderCard(
+                          name: _job.serviceProvider?.name ?? '',
+                          jobTitle: _job.serviceProvider?.category ?? '',
+                          description: _job.serviceProvider?.description ?? '',
+                          rating: _job.serviceProvider?.rating ?? 0,
+                        )
+                      ],
+                    ),
+            ),
           ],
         ),
       ),

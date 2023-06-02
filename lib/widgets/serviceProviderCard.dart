@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:random_avatar/random_avatar.dart';
-import 'package:ruralclap_app/controllers/job.dart';
-import 'package:ruralclap_app/utls/routes.dart';
 
 class ServiceProviderCard extends StatelessWidget {
   ServiceProviderCard({
@@ -16,7 +13,6 @@ class ServiceProviderCard extends StatelessWidget {
 
   final String name, jobTitle, description;
   final double rating;
-  final JobController _jobController = Get.find<JobController>();
   Function()? onHire;
 
   @override
